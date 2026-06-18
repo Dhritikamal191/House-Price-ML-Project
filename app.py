@@ -97,7 +97,7 @@ with col2:
 with col3:
     st.metric(
         "Model",
-        "best_model_name"
+        best_model_name
     )
 
 st.divider()
