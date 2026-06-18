@@ -227,18 +227,21 @@ if predict:
             mode="gauge+number",
             value=prediction,
             title={"text": "Predicted Price"},
-            gauge={
-                "axis": {
-                    "range": [0, max(prediction*1.5, 500000)]
-                }
-            }
-        )
-    )
+    gauge={"axis": {"range": [0, max(prediction*1.5, 500000)]}}))
 
     st.plotly_chart(
         fig,
-        use_container_width=True
-    )
+        use_container_width=True)
+
+    report = pd.DataFrame({
+
+    "PredictedPrice":[prediction]})
+
+    st.download_button(
+    "📥 Download Prediction Report",
+    report.to_csv(index=False),
+    file_name="prediction_report.csv",
+    mime="text/csv")
 
 # ==========================================
 # INPUT SUMMARY
@@ -308,3 +311,55 @@ try:
 
 except:
     pass
+
+st.subheader("🏡 Property Summary")
+
+summary = pd.DataFrame({
+
+    "Feature":[
+        "Overall Quality",
+        "Living Area",
+        "Garage Capacity",
+        "Bedrooms",
+        "Bathrooms"
+    ],
+
+    "Value":[
+        input_df.get("OverallQual",[0])[0],
+        input_df.get("GrLivArea",[0])[0],
+        input_df.get("GarageCars",[0])[0],
+        input_df.get("BedroomAbvGr",[0])[0],
+        input_df.get("FullBath",[0])[0]
+    ]
+})
+
+st.dataframe(
+    summary,
+    use_container_width=True
+)
+
+st.subheader("⚙️ Engineered Features")
+
+engineered_df = pd.DataFrame({
+
+    "Feature":[
+        "TotalSF",
+        "TotalBathrooms",
+        "HouseAge",
+        "RemodAge",
+        "TotalPorchSF"
+    ],
+
+    "Value":[
+        input_df["TotalSF"].iloc[0],
+        input_df["TotalBathrooms"].iloc[0],
+        input_df["HouseAge"].iloc[0],
+        input_df["RemodAge"].iloc[0],
+        input_df["TotalPorchSF"].iloc[0]
+    ]
+})
+
+st.dataframe(
+    engineered_df,
+    use_container_width=True
+)
