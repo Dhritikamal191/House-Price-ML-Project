@@ -296,7 +296,7 @@ Evaluation Metrics:
 try:
 
     comparison = pd.read_csv(
-        "models/model_comparison_after_tuning.csv"
+        "model_comparison_after_tuning.csv"
     )
 
     st.subheader("📊 Model Comparison")
