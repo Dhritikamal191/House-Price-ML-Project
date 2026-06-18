@@ -16,8 +16,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
-
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 warnings.filterwarnings("ignore")
 
 
@@ -29,7 +28,7 @@ print("=" * 50)
 print("LOADING DATASET")
 print("=" * 50)
 
-df = pd.read_csv("data/train.csv")
+df = pd.read_csv("train.csv")
 
 print("\nDataset Loaded Successfully!")
 print("Shape:", df.shape)
@@ -189,11 +188,9 @@ print("Number of Categorical Features:",
 # ==========================================
 
 numeric_transformer = Pipeline([
-    (
-        "imputer",
-        SimpleImputer(strategy="median")
-    )
-])
+    (   "imputer",
+        SimpleImputer(strategy="median")),
+        ("scaler", StandardScaler())])
 
 
 categorical_transformer = Pipeline([
@@ -235,6 +232,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import Lasso
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
 
 from sklearn.metrics import (
     mean_absolute_error,
@@ -262,7 +260,7 @@ models = {
     ),
 
     "Random Forest": RandomForestRegressor(
-        n_estimators=200,
+        n_estimators=500,
         random_state=42,
         n_jobs=-1
     )
@@ -447,7 +445,7 @@ lasso_pipeline = Pipeline([
     ("preprocessor", preprocessor),
     ("model", Lasso(
         random_state=42,
-        max_iter=10000
+        max_iter=50000
     ))
 ])
 
@@ -585,7 +583,7 @@ print("=" * 50)
 print(tuned_results_df)
 
 tuned_results_df.to_csv(
-    "models/model_comparison_after_tuning.csv"
+    "model_comparison_after_tuning.csv"
 )
 
 print(
@@ -593,13 +591,13 @@ print(
 )
 
 print(
-    "models/model_comparison_after_tuning.csv"
+    "model_comparison_after_tuning.csv"
 )
 
 # Save training columns
 joblib.dump(
     X.columns.tolist(),
-    "models/feature_columns.pkl"
+    "feature_columns.pkl"
 )
 
 # Save categorical values
@@ -612,7 +610,7 @@ for col in categorical_features:
 
 joblib.dump(
     category_mapping,
-    "models/category_mapping.pkl"
+    "category_mapping.pkl"
 )
 
 # ==========================================
@@ -621,7 +619,7 @@ joblib.dump(
 
 joblib.dump(
     best_final_model,
-    "models/best_model.pkl"
+    "best_model.pkl"
 )
 
 print("\n" + "=" * 50)
@@ -635,6 +633,6 @@ print(
 )
 
 print("\nSaved Files:")
-print("✔ models/best_model.pkl")
-print("✔ models/model_comparison_before_tuning.csv")
-print("✔ models/model_comparison_after_tuning.csv")
+print("✔ best_model.pkl")
+print("✔ model_comparison_before_tuning.csv")
+print("✔ model_comparison_after_tuning.csv")
