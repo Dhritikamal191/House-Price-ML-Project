@@ -13,7 +13,7 @@ st.set_page_config(
 # LOAD FILES
 # ==================================
 
-model = joblib.load("models/best_model.pkl")
+model = joblib.load("best_model.pkl")
 
 feature_columns = joblib.load(
     "feature_columns.pkl"
