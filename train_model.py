@@ -596,6 +596,25 @@ print(
     "models/model_comparison_after_tuning.csv"
 )
 
+# Save training columns
+joblib.dump(
+    X.columns.tolist(),
+    "models/feature_columns.pkl"
+)
+
+# Save categorical values
+category_mapping = {}
+
+for col in categorical_features:
+    category_mapping[col] = sorted(
+        X[col].dropna().unique().tolist()
+    )
+
+joblib.dump(
+    category_mapping,
+    "models/category_mapping.pkl"
+)
+
 # ==========================================
 # SAVE FINAL BEST MODEL
 # ==========================================
