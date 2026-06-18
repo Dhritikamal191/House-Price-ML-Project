@@ -389,3 +389,124 @@ print(best_model_name)
 print(
     f"Best R² Score: {best_r2:.4f}"
 )
+
+# ==========================================
+# HYPERPARAMETER TUNING
+# ==========================================
+
+from sklearn.model_selection import RandomizedSearchCV
+
+print("\n" + "=" * 50)
+print("HYPERPARAMETER TUNING")
+print("=" * 50)
+
+
+# Dictionary to store tuned models
+tuned_models = {}
+
+# ==========================================
+# RIDGE REGRESSION TUNING
+# ==========================================
+
+print("\nTuning Ridge Regression...")
+
+ridge_pipeline = Pipeline([
+    ("preprocessor", preprocessor),
+    ("model", Ridge(random_state=42))
+])
+
+ridge_params = {
+    "model__alpha": [0.01, 0.1, 1, 10, 100]
+}
+
+ridge_search = RandomizedSearchCV(
+    estimator=ridge_pipeline,
+    param_distributions=ridge_params,
+    n_iter=5,
+    cv=5,
+    scoring="r2",
+    random_state=42,
+    n_jobs=-1
+)
+
+ridge_search.fit(X_train, y_train)
+
+tuned_models["Ridge Regression"] = ridge_search
+
+print("Best Parameters:", ridge_search.best_params_)
+print("Best CV R²:", ridge_search.best_score_)
+
+
+# ==========================================
+# LASSO REGRESSION TUNING
+# ==========================================
+
+print("\nTuning Lasso Regression...")
+
+lasso_pipeline = Pipeline([
+    ("preprocessor", preprocessor),
+    ("model", Lasso(
+        random_state=42,
+        max_iter=10000
+    ))
+])
+
+lasso_params = {
+    "model__alpha": [0.0001, 0.001, 0.01, 0.1, 1]
+}
+
+lasso_search = RandomizedSearchCV(
+    estimator=lasso_pipeline,
+    param_distributions=lasso_params,
+    n_iter=5,
+    cv=5,
+    scoring="r2",
+    random_state=42,
+    n_jobs=-1
+)
+
+lasso_search.fit(X_train, y_train)
+
+tuned_models["Lasso Regression"] = lasso_search
+
+print("Best Parameters:", lasso_search.best_params_)
+print("Best CV R²:", lasso_search.best_score_)
+
+
+# ==========================================
+# RANDOM FOREST TUNING
+# ==========================================
+
+print("\nTuning Random Forest...")
+
+rf_pipeline = Pipeline([
+    ("preprocessor", preprocessor),
+    ("model", RandomForestRegressor(
+        random_state=42,
+        n_jobs=-1
+    ))
+])
+
+rf_params = {
+    "model__n_estimators": [100, 200, 300],
+    "model__max_depth": [None, 10, 20, 30],
+    "model__min_samples_split": [2, 5, 10],
+    "model__min_samples_leaf": [1, 2, 4]
+}
+
+rf_search = RandomizedSearchCV(
+    estimator=rf_pipeline,
+    param_distributions=rf_params,
+    n_iter=20,
+    cv=5,
+    scoring="r2",
+    random_state=42,
+    n_jobs=-1
+)
+
+rf_search.fit(X_train, y_train)
+
+tuned_models["Random Forest"] = rf_search
+
+print("Best Parameters:", rf_search.best_params_)
+print("Best CV R²:", rf_search.best_score_)
