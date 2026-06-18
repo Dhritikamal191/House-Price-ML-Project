@@ -226,3 +226,166 @@ preprocessor = ColumnTransformer([
 
 
 print("\nPreprocessing Pipeline Created Successfully!")
+
+# ==========================================
+# IMPORT MODELS AND METRICS
+# ==========================================
+
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
+from sklearn.ensemble import RandomForestRegressor
+
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
+
+
+# ==========================================
+# DEFINE MODELS
+# ==========================================
+
+models = {
+    "Linear Regression": LinearRegression(),
+
+    "Ridge Regression": Ridge(
+        alpha=1.0,
+        random_state=42
+    ),
+
+    "Lasso Regression": Lasso(
+        alpha=0.001,
+        random_state=42,
+        max_iter=10000
+    ),
+
+    "Random Forest": RandomForestRegressor(
+        n_estimators=200,
+        random_state=42,
+        n_jobs=-1
+    )
+}
+
+
+# ==========================================
+# MODEL TRAINING & EVALUATION
+# ==========================================
+
+print("\n" + "=" * 50)
+print("MODEL TRAINING")
+print("=" * 50)
+
+results = {}
+
+trained_models = {}
+
+best_model_name = None
+best_pipeline = None
+best_r2 = -np.inf
+
+
+for name, model in models.items():
+
+    print(f"\nTraining {name}...")
+
+    pipeline = Pipeline([
+        ("preprocessor", preprocessor),
+        ("model", model)
+    ])
+
+    # Train model
+    pipeline.fit(X_train, y_train)
+
+    # Predictions
+    predictions = pipeline.predict(X_test)
+
+    # Metrics
+    mae = mean_absolute_error(
+        y_test,
+        predictions
+    )
+
+    rmse = np.sqrt(
+        mean_squared_error(
+            y_test,
+            predictions
+        )
+    )
+
+    r2 = r2_score(
+        y_test,
+        predictions
+    )
+
+    # Store results
+    results[name] = {
+        "MAE": mae,
+        "RMSE": rmse,
+        "R2": r2
+    }
+
+    trained_models[name] = pipeline
+
+    print(f"MAE  : {mae:,.2f}")
+    print(f"RMSE : {rmse:,.2f}")
+    print(f"R²   : {r2:.4f}")
+
+    print("-" * 40)
+
+    # Track best model
+    if r2 > best_r2:
+        best_r2 = r2
+        best_pipeline = pipeline
+        best_model_name = name
+
+
+# ==========================================
+# MODEL COMPARISON TABLE
+# ==========================================
+
+results_df = pd.DataFrame(results).T
+
+results_df = results_df.sort_values(
+    by="R2",
+    ascending=False
+)
+
+
+print("\n" + "=" * 50)
+print("MODEL COMPARISON")
+print("=" * 50)
+
+print(results_df)
+
+
+# ==========================================
+# SAVE COMPARISON RESULTS
+# ==========================================
+
+os.makedirs("models", exist_ok=True)
+
+results_df.to_csv(
+    "models/model_comparison_before_tuning.csv"
+)
+
+print(
+    "\nModel comparison saved as:"
+)
+
+print(
+    "models/model_comparison_before_tuning.csv"
+)
+
+
+# ==========================================
+# BEST MODEL BEFORE TUNING
+# ==========================================
+
+print("\nBest Model Before Tuning:")
+print(best_model_name)
+
+print(
+    f"Best R² Score: {best_r2:.4f}"
+)
