@@ -510,3 +510,112 @@ tuned_models["Random Forest"] = rf_search
 
 print("Best Parameters:", rf_search.best_params_)
 print("Best CV R²:", rf_search.best_score_)
+
+# ==========================================
+# EVALUATE TUNED MODELS
+# ==========================================
+
+print("\n" + "=" * 50)
+print("EVALUATING TUNED MODELS")
+print("=" * 50)
+
+tuned_results = {}
+
+best_final_model = None
+best_final_name = None
+best_final_r2 = -np.inf
+
+
+for name, search in tuned_models.items():
+
+    model = search.best_estimator_
+
+    predictions = model.predict(X_test)
+
+    mae = mean_absolute_error(
+        y_test,
+        predictions
+    )
+
+    rmse = np.sqrt(
+        mean_squared_error(
+            y_test,
+            predictions
+        )
+    )
+
+    r2 = r2_score(
+        y_test,
+        predictions
+    )
+
+    tuned_results[name] = {
+        "MAE": mae,
+        "RMSE": rmse,
+        "R2": r2
+    }
+
+    print(f"\n{name}")
+    print(f"MAE  : {mae:,.2f}")
+    print(f"RMSE : {rmse:,.2f}")
+    print(f"R²   : {r2:.4f}")
+
+    if r2 > best_final_r2:
+        best_final_r2 = r2
+        best_final_model = model
+        best_final_name = name
+
+# ==========================================
+# COMPARISON AFTER TUNING
+# ==========================================
+
+tuned_results_df = pd.DataFrame(
+    tuned_results
+).T
+
+tuned_results_df = tuned_results_df.sort_values(
+    by="R2",
+    ascending=False
+)
+
+print("\n" + "=" * 50)
+print("MODEL COMPARISON AFTER TUNING")
+print("=" * 50)
+
+print(tuned_results_df)
+
+tuned_results_df.to_csv(
+    "models/model_comparison_after_tuning.csv"
+)
+
+print(
+    "\nSaved:"
+)
+
+print(
+    "models/model_comparison_after_tuning.csv"
+)
+
+# ==========================================
+# SAVE FINAL BEST MODEL
+# ==========================================
+
+joblib.dump(
+    best_final_model,
+    "models/best_model.pkl"
+)
+
+print("\n" + "=" * 50)
+print("FINAL MODEL")
+print("=" * 50)
+
+print("Best Model :", best_final_name)
+
+print(
+    f"Final R² Score: {best_final_r2:.4f}"
+)
+
+print("\nSaved Files:")
+print("✔ models/best_model.pkl")
+print("✔ models/model_comparison_before_tuning.csv")
+print("✔ models/model_comparison_after_tuning.csv")
