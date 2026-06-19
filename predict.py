@@ -1,3 +1,8 @@
+
+import joblib
+import numpy as np
+import pandas as pd
+
 best_model = joblib.load("models/best_model.pkl")
 
 test_df = pd.read_csv("test.csv")
