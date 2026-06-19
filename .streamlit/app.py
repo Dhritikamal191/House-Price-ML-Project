@@ -287,6 +287,14 @@ with st.expander("📊 Model Comparison"):
      except:
             pass
      
+     st.warning("""
+     Linear Regression was included as a baseline model.
+
+     The model performed well on the original dataset (R² ≈ 0.87). However, after feature engineering, severe multicollinearity caused unstable coefficient estimates, resulting in extremely large MAE, MSE and RMSE values.
+
+     Therefore, Ridge Regression, Lasso Regression, and Random Forest were preferred for final model selection.
+     """)
+
      linear = pd.read_csv("data/linear_regression_results.csv") 
      st.subheader("Linear Regression Baseline Performance")
      st.dataframe(linear, use_container_width=True)
