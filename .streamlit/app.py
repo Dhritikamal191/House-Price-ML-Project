@@ -262,76 +262,67 @@ with st.expander("📋 View Input Data"):
 # ==========================================
 # MODEL INFORMATION
 # ==========================================
+with st.expander("📌 Project Information")
+     st.subheader("📌 Project Information")
 
-st.subheader("📌 Project Information")
+     st.info("""
+     This Housing Price Prediction System was trained using:
 
-st.info("""
-This Housing Price Prediction System was trained using:
+     • Linear Regression
 
-• Linear Regression
+     • Ridge Regression
 
-• Ridge Regression
+     • Lasso Regression
 
-• Lasso Regression
+     • Random Forest Regressor
 
-• Random Forest Regressor
+     Feature Engineering:
 
-Feature Engineering:
+     • TotalSF
 
-• TotalSF
+     • TotalBathrooms
 
-• TotalBathrooms
+     • HouseAge
 
-• HouseAge
+     • RemodAge
 
-• RemodAge
+     • TotalPorchSF
 
-• TotalPorchSF
+     Evaluation Metrics:
 
-Evaluation Metrics:
+     • MAE
 
-• MAE
+     • MSE
 
-• RMSE
+     • RMSE
 
-• R² Score
-""")
+     • R² Score
+     """)
 
 # ==========================================
 # MODEL COMPARISON
 # ==========================================
 
-try:
+with st.expander("📊 Model Comparison"):
+     try:
+         comparison = pd.read_csv("data/model_comparison_before_tuning.csv")
 
-    comparison = pd.read_csv(
-        "data/model_comparison_before_tuning.csv"
-    )
+         st.subheader("📊 Model Comparison Before Tuning")
 
-    st.subheader("📊 Model Comparison Before Tuning")
+         st.dataframe(comparison,use_container_width=True)
 
-    st.dataframe(
-        comparison,
-        use_container_width=True
-    )
+     except:
+            pass
 
-except:
-    pass
+     try:
+         comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
 
-try:
+         st.subheader("📊 Model Comparison After Tuning")
 
-    comparison = pd.read_csv(
-        "data/model_comparison_after_tuning.csv"
-    )
+         st.dataframe(comparison,use_container_width=True)
 
-    st.subheader("📊 Model Comparison After Tuning")
-
-    st.dataframe(
-        comparison,
-        use_container_width=True
-    )
-
-except:
-    pass
+     except:
+            pass
 
 st.subheader("🏡 Property Summary")
 
