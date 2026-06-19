@@ -262,7 +262,7 @@ with st.expander("📋 View Input Data"):
 # ==========================================
 # MODEL INFORMATION
 # ==========================================
-with st.expander("📌 Project Information")
+with st.expander("📌 Project Information"):
      st.subheader("📌 Project Information")
 
      st.info("""
