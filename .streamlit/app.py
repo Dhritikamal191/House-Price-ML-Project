@@ -286,7 +286,11 @@ with st.expander("📊 Model Comparison"):
 
      except:
             pass
-
+     
+     linear = pd.read_csv("data/linear_regression_results.csv") 
+     st.subheader("Linear Regression Baseline Performance")
+     st.dataframe(linear, use_container_width=True)
+    
      try:
          comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
 
