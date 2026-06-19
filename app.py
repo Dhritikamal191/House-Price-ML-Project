@@ -304,10 +304,26 @@ Evaluation Metrics:
 try:
 
     comparison = pd.read_csv(
+        "model_comparison_before_tuning.csv"
+    )
+
+    st.subheader("📊 Model Comparison Before Tuning")
+
+    st.dataframe(
+        comparison,
+        use_container_width=True
+    )
+
+except:
+    pass
+
+try:
+
+    comparison = pd.read_csv(
         "model_comparison_after_tuning.csv"
     )
 
-    st.subheader("📊 Model Comparison")
+    st.subheader("📊 Model Comparison After Tuning")
 
     st.dataframe(
         comparison,
