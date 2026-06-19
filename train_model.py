@@ -338,6 +338,36 @@ for name, model in models.items():
         best_pipeline = pipeline
         best_model_name = name
 
+# ==========================================
+# LINEAR REGRESSION EVALUATION
+# ==========================================
+
+linear_model = trained_models["Linear Regression"]
+
+linear_pred = linear_model.predict(X_test)
+
+linear_mae = mean_absolute_error(
+    y_test,
+    linear_pred
+)
+
+linear_rmse = np.sqrt(
+    mean_squared_error(
+        y_test,
+        linear_pred
+    )
+)
+
+linear_r2 = r2_score(
+    y_test,
+    linear_pred
+)
+
+results["Linear Regression"] = {
+    "MAE": linear_mae,
+    "RMSE": linear_rmse,
+    "R2": linear_r2
+}
 
 # ==========================================
 # MODEL COMPARISON TABLE
@@ -365,7 +395,7 @@ print(results_df)
 os.makedirs("models", exist_ok=True)
 
 results_df.to_csv(
-    "models/model_comparison_before_tuning.csv"
+    "model_comparison_before_tuning.csv"
 )
 
 print(
@@ -373,7 +403,7 @@ print(
 )
 
 print(
-    "models/model_comparison_before_tuning.csv"
+    "model_comparison_before_tuning.csv"
 )
 
 
@@ -508,6 +538,7 @@ tuned_models["Random Forest"] = rf_search
 
 print("Best Parameters:", rf_search.best_params_)
 print("Best CV R²:", rf_search.best_score_)
+
 
 # ==========================================
 # EVALUATE TUNED MODELS
