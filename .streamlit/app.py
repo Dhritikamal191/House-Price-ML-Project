@@ -18,14 +18,14 @@ st.set_page_config(
 # LOAD FILES
 # ==========================================
 
-model = joblib.load("best_model.pkl")
+model = joblib.load("models/best_model.pkl")
 
 feature_columns = joblib.load(
-    "feature_columns.pkl"
+    "models/feature_columns.pkl"
 )
 
 category_mapping = joblib.load(
-    "category_mapping.pkl"
+    "models/category_mapping.pkl"
 )
 
 # ==========================================
@@ -76,7 +76,7 @@ Models Used:
 # ==========================================
 
 comparison = pd.read_csv(
-    "model_comparison_after_tuning.csv")
+    "data/model_comparison_after_tuning.csv")
 
 best_model_name = comparison.iloc[0,0]
 
@@ -304,7 +304,7 @@ Evaluation Metrics:
 try:
 
     comparison = pd.read_csv(
-        "model_comparison_before_tuning.csv"
+        "data/model_comparison_before_tuning.csv"
     )
 
     st.subheader("📊 Model Comparison Before Tuning")
@@ -320,7 +320,7 @@ except:
 try:
 
     comparison = pd.read_csv(
-        "model_comparison_after_tuning.csv"
+        "data/model_comparison_after_tuning.csv"
     )
 
     st.subheader("📊 Model Comparison After Tuning")
