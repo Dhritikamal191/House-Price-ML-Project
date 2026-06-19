@@ -305,6 +305,11 @@ for name, model in models.items():
         predictions
     )
 
+    mse = mean_squared_error(
+    y_test,
+    predictions
+    )
+
     rmse = np.sqrt(
         mean_squared_error(
             y_test,
@@ -326,6 +331,7 @@ for name, model in models.items():
 
     trained_models[name] = pipeline
 
+    print(f"MSE  : {mse:,.2f}")
     print(f"MAE  : {mae:,.2f}")
     print(f"RMSE : {rmse:,.2f}")
     print(f"R²   : {r2:.4f}")
