@@ -36,7 +36,7 @@ st.markdown("""
 <style>
 
 .main-title{
-    font-size:40px;
+    font-size:100px;
     font-weight:bold;
     text-align:center;
     color:#2563eb;
