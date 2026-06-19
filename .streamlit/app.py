@@ -29,37 +29,10 @@ category_mapping = joblib.load(
 )
 
 # ==========================================
-# CUSTOM CSS
-# ==========================================
-
-st.markdown("""
-<style>
-
-.main-title{
-    font-size:100px;
-    font-weight:bold;
-    text-align:center;
-    color:#2563eb;
-}
-
-.metric-card{
-    background-color:#f8fafc;
-    padding:70px;
-    border-radius:30px;
-    border:1px solid #e5e7eb;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# ==========================================
 # HEADER
 # ==========================================
 
-st.markdown(
-    '<p class="main-title">🏠 Housing Price Prediction System</p>',
-    unsafe_allow_html=True
-)
+st.title("🏠 Housing Price Prediction System")
 
 st.markdown("""
 Predict residential property prices using Machine Learning.
