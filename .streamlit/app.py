@@ -290,7 +290,7 @@ with st.expander("📊 Model Comparison"):
      st.warning("""
      Linear Regression was included as a baseline model.
 
-     The model performed well on the original dataset (R² ≈ 0.87). However, after feature engineering, severe multicollinearity caused unstable coefficient estimates, resulting in extremely large MAE, MSE and RMSE values.
+     The model performed well on the original dataset (R² ≈ 0.87). However, after feature engineering, severe multicollinearity caused unstable coefficient estimates, resulting in extremely large MSE and R2 values.
 
      Therefore, Ridge Regression, Lasso Regression, and Random Forest were preferred for final model selection.
      """)
