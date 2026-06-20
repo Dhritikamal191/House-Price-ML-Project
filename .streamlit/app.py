@@ -70,8 +70,6 @@ st.sidebar.header("🏡 Property Information")
 
 user_data = {}
 
-default_value = float(numeric_defaults.get(col,0))
-
 for col in feature_columns:
 
     if col in [
