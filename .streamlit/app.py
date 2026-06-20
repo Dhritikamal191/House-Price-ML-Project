@@ -152,7 +152,8 @@ predict = st.button(
 if predict:
 
     prediction = model.predict(input_df)[0]
-   
+    predictions = np.clip(prediction, a_min=0, a_max=None)
+
     st.success(
         f"Estimated House Price: ${prediction:,.0f}"
     )
@@ -162,20 +163,20 @@ if predict:
     with col1:
          st.metric(
             "Predicted Price",
-            f"${prediction:,.0f}"
+            f"${predictions:,.0f}"
          )
 
     with col2:
          st.metric(
             "Price (Thousands)",
-            f"${prediction/1000:.1f}K"
+            f"${predictions/1000:.1f}K"
          )
 
     with col3:
-         if prediction < 150000:
+         if predictions < 150000:
             category = "Budget Home 🏠"
 
-         elif prediction < 300000:
+         elif predictions < 300000:
               category = "Mid-Range Home 🏡"
 
          else:
@@ -192,7 +193,7 @@ if predict:
     fig.add_trace(
     go.Indicator(
         mode="gauge+number+delta",
-        value=prediction,
+        value=predictions,
 
         number={
             "prefix":"$",
@@ -213,7 +214,7 @@ if predict:
         gauge={
 
             "axis":{
-                "range":[0,max(prediction*1.5,500000)],
+                "range":[0,max(predictions*1.5,500000)],
                 "tickwidth":2
             },
 
@@ -249,7 +250,7 @@ if predict:
 
                 "thickness":0.8,
 
-                "value":prediction
+                "value":predictions
             }
         }
       )
@@ -272,7 +273,7 @@ if predict:
 
     report = pd.DataFrame({
 
-    "PredictedPrice":[prediction]})
+    "PredictedPrice":[predictions]})
 
     st.download_button(
     "📥 Download Prediction Report",
