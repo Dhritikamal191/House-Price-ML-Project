@@ -175,6 +175,7 @@ predict = st.button(
 if predict:
 
     prediction = model.predict(input_df)[0]
+    prediction = max(prediction,0)
 
     st.success(
         f"Estimated House Price: ${prediction:,.0f}"
@@ -247,7 +248,7 @@ if predict:
             "steps":[
 
                 {
-                    "range":[-150000,150000],
+                    "range":[0,150000],
                     "color":"#dbeafe"
                 },
 
