@@ -168,6 +168,13 @@ predict = st.button(
     use_container_width=True
 )
 
+st.write("Expected Features:", len(feature_columns))
+st.write("Input Features:", len(input_df.columns))
+
+missing = set(feature_columns) - set(input_df.columns)
+
+st.write("Missing Features:", missing)
+
 # ==========================================
 # PREDICTION RESULT
 # ==========================================
