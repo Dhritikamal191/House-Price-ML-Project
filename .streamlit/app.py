@@ -77,10 +77,10 @@ selected_model = st.sidebar.selectbox(
     index=3
 )
 
-0 = Linear Regression
-1 = Ridge Regression
-2 = Lasso Regression
-3 = Random Forest
+0 == Linear Regression
+1 == Ridge Regression
+2 == Lasso Regression
+3 == Random Forest
 
 if selected_model == "Linear Regression":
 
