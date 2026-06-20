@@ -162,6 +162,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("\nTrain Shape:", X_train.shape)
 print("Test Shape :", X_test.shape)
 
+numeric_defaults = X_train.select_dtypes(
+    include="number"
+).median()
+
+joblib.dump(
+    numeric_defaults,
+    "numeric_defaults.pkl"
+)
 
 # ==========================================
 # IDENTIFY COLUMN TYPES
