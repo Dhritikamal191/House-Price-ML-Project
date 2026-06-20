@@ -80,14 +80,15 @@ for col in feature_columns:
         "TotalPorchSF"
     ]:
         continue
-
+        
+    default_value = float(numeric_defaults.get(col,0))
+        
     if col in category_mapping:
         user_data[col] = st.sidebar.selectbox(col,category_mapping[col])
     else:
          if col == "Id":
             user_data[col] = 1
          else:
-              default_value = float(numeric_defaults.get(col,0))
               user_data[col] = st.sidebar.number_input(col,value= default_value)
 
 # ==========================================
