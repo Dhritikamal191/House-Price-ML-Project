@@ -628,10 +628,21 @@ joblib.dump(
 # SAVE FINAL BEST MODEL
 # ==========================================
 
+deployment_model = tuned_models[
+    "Random Forest"
+].best_estimator_
+
 joblib.dump(
-    best_final_model,
+    deployment_model,
     "best_model.pkl"
 )
+
+joblib.dump(
+    "Random Forest",
+    "random_forest.pkl"
+)
+
+print("\nDeployment Model: Random Forest")
 
 print("\n" + "=" * 50)
 print("FINAL MODEL")
