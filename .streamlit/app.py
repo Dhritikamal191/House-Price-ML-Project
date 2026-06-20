@@ -247,7 +247,7 @@ if predict:
             "steps":[
 
                 {
-                    "range":[0,150000],
+                    "range":[-150000,150000],
                     "color":"#dbeafe"
                 },
 
