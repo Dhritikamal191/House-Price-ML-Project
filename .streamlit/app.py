@@ -20,14 +20,11 @@ st.set_page_config(
 
 model = joblib.load("models/best_model.pkl")
 
-feature_columns = joblib.load(
-    "models/feature_columns.pkl"
-)
+feature_columns = joblib.load("models/feature_columns.pkl")
 
-category_mapping = joblib.load(
-    "models/category_mapping.pkl"
-)
+category_mapping = joblib.load("models/category_mapping.pkl")
 
+numeric_defaults = joblib.load("models/numeric_defaults.pkl")
 # ==========================================
 # HEADER
 # ==========================================
@@ -48,30 +45,20 @@ Models Used:
 # KPI CARDS
 # ==========================================
 
-comparison = pd.read_csv(
-    "data/model_comparison_after_tuning.csv")
+comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
 
 best_model_name = comparison.iloc[0,0]
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric(
-        "Features",
-        len(feature_columns)
-    )
+     st.metric("Features",len(feature_columns))
 
 with col2:
-    st.metric(
-        "Categorical Features",
-        len(category_mapping)
-    )
+     st.metric("Categorical Features",len(category_mapping))
 
 with col3:
-    st.metric(
-        "Model",
-        best_model_name
-    )
+     st.metric("Model",best_model_name)
 
 st.divider()
 
@@ -82,6 +69,8 @@ st.divider()
 st.sidebar.header("🏡 Property Information")
 
 user_data = {}
+
+default_value = float(numeric_defaults.get(col,0))
 
 for col in feature_columns:
 
@@ -95,24 +84,12 @@ for col in feature_columns:
         continue
 
     if col in category_mapping:
-
-        user_data[col] = st.sidebar.selectbox(
-            col,
-            category_mapping[col]
-        )
-
+        user_data[col] = st.sidebar.selectbox(col,category_mapping[col])
     else:
-
-        if col == "Id":
-
+         if col == "Id":
             user_data[col] = 1
-
-        else:
-
-            user_data[col] = st.sidebar.number_input(
-                col,
-                value=0.0
-            )
+         else:
+              user_data[col] = st.sidebar.number_input(col,value= default_value)
 
 # ==========================================
 # DATAFRAME
