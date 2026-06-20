@@ -89,6 +89,7 @@ for col in feature_columns:
          if col == "Id":
             user_data[col] = 1
          else:
+              default_value = float(numeric_defaults.get(col,0))
               user_data[col] = st.sidebar.number_input(col,value= default_value)
 
 # ==========================================
