@@ -180,36 +180,118 @@ if predict:
         f"Estimated House Price: ${prediction:,.0f}"
     )
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
-
-        st.metric(
+         st.metric(
             "Predicted Price",
             f"${prediction:,.0f}"
-        )
+         )
 
     with col2:
-
-        st.metric(
+         st.metric(
             "Price (Thousands)",
             f"${prediction/1000:.1f}K"
-        )
+         )
+
+    with col3:
+         if prediction < 150000:
+            category = "Budget Home 🏠"
+
+         elif prediction < 300000:
+              category = "Mid-Range Home 🏡"
+
+         else:
+              category = "Premium Home 🏰"
+
+         st.metric("Property Category", category)
 
     # ======================================
     # GAUGE CHART
     # ======================================
 
-    fig = go.Figure(
-        go.Indicator(
-            mode="gauge+number",
-            value=prediction,
-            title={"text": "Predicted Price"},
-    gauge={"axis": {"range": [0, max(prediction*1.5, 500000)]}}))
+    fig = go.Figure()
+
+    fig.add_trace(
+    go.Indicator(
+        mode="gauge+number+delta",
+        value=prediction,
+
+        number={
+            "prefix":"$",
+            "valueformat":",.0f"
+        },
+
+        delta={
+            "reference":180000,
+            "relative":True,
+            "valueformat":".1%"
+        },
+
+        title={
+            "text":"🏠 Predicted House Price",
+            "font":{"size":24}
+        },
+
+        gauge={
+
+            "axis":{
+                "range":[0,max(prediction*1.5,500000)],
+                "tickwidth":2
+            },
+
+            "bar":{
+                "thickness":0.35
+            },
+
+            "steps":[
+
+                {
+                    "range":[0,150000],
+                    "color":"#dbeafe"
+                },
+
+                {
+                    "range":[150000,300000],
+                    "color":"#93c5fd"
+                },
+
+                {
+                    "range":[300000,500000],
+                    "color":"#2563eb"
+                }
+
+            ],
+
+            "threshold":{
+
+                "line":{
+                    "color":"red",
+                    "width":4
+                },
+
+                "thickness":0.8,
+
+                "value":prediction
+            }
+        }
+      )
+    )
+
+    fig.update_layout(
+    height=450,
+    margin=dict(
+        l=30,
+        r=30,
+        t=80,
+        b=20
+       )
+    )
 
     st.plotly_chart(
-        fig,
-        use_container_width=True)
+    fig,
+    use_container_width=True
+    )
 
     report = pd.DataFrame({
 
