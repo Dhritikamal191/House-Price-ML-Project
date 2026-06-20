@@ -71,11 +71,6 @@ st.divider()
 
 st.sidebar.header("🏡 Property Information")
 
-0 == Linear Regression
-1 == Ridge Regression
-2 == Lasso Regression
-3 == Random Forest
-
 selected_model = st.sidebar.selectbox(
     "Select Model",
     list(models.keys()),
