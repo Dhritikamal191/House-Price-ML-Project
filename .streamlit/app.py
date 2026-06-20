@@ -152,8 +152,7 @@ predict = st.button(
 if predict:
 
     prediction = model.predict(input_df)[0]
-    prediction = min(prediction,0)
-
+   
     st.success(
         f"Estimated House Price: ${prediction:,.0f}"
     )
