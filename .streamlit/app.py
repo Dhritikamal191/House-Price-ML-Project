@@ -74,7 +74,7 @@ st.sidebar.header("🏡 Property Information")
 selected_model = st.sidebar.selectbox(
     "Select Model",
     list(models.keys()),
-    index=4
+    index=3
 )
 
 if selected_model == "Linear Regression":
