@@ -61,7 +61,7 @@ with col2:
      st.metric("Categorical Features",len(category_mapping))
 
 with col3:
-     st.metric("Model",best_model_name)
+     st.metric("Best Model",best_model_name)
 
 st.divider()
 
