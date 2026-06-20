@@ -25,6 +25,9 @@ feature_columns = joblib.load("models/feature_columns.pkl")
 category_mapping = joblib.load("models/category_mapping.pkl")
 
 numeric_defaults = joblib.load("models/numeric_defaults.pkl")
+
+random_forest = joblib.load("models/random_forest.pkl")
+
 # ==========================================
 # HEADER
 # ==========================================
@@ -151,8 +154,8 @@ predict = st.button(
 
 if predict:
 
-    prediction = model.predict(input_df)[0]
-    predictions = np.clip(prediction, a_min=0, a_max=None)
+    predictions = best_model.predict(input_df)[0]
+    
 
     st.success(
         f"Estimated House Price: ${predictions:,.0f}"
