@@ -154,8 +154,9 @@ predict = st.button(
 
 if predict:
 
-    predictions = best_model.predict(input_df)[0]
+    prediction = model.predict(input_df)[0]
     
+    predictions = np.clip(prediction, a_min=0, a_max=None)
 
     st.success(
         f"Estimated House Price: ${predictions:,.0f}"
