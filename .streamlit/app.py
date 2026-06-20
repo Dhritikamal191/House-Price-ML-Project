@@ -155,7 +155,7 @@ if predict:
     predictions = np.clip(prediction, a_min=0, a_max=None)
 
     st.success(
-        f"Estimated House Price: ${prediction:,.0f}"
+        f"Estimated House Price: ${predictions:,.0f}"
     )
 
     col1, col2, col3 = st.columns(3)
