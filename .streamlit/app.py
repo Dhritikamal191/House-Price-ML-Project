@@ -159,8 +159,6 @@ try:
 except:
     pass
 
-st.write(input_df.T)
-
 # ==========================================
 # PREDICTION BUTTON
 # ==========================================
@@ -169,13 +167,6 @@ predict = st.button(
     "🔍 Predict House Price",
     use_container_width=True
 )
-
-st.write("Expected Features:", len(feature_columns))
-st.write("Input Features:", len(input_df.columns))
-
-missing = set(feature_columns) - set(input_df.columns)
-
-st.write("Missing Features:", missing)
 
 # ==========================================
 # PREDICTION RESULT
