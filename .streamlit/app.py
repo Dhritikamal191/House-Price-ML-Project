@@ -94,7 +94,7 @@ st.sidebar.info(
     f"Total Features: {len(feature_columns)}"
 )
 
-st.sidebar.markdown(
+st.sidebar.info(
     f"Most features are pre-filled using dataset medians."
 )
 
