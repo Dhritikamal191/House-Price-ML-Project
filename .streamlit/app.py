@@ -69,6 +69,8 @@ st.divider()
 # INPUT SECTION
 # ==========================================
 
+st.sidebar.header("🤖 Model Selection")
+
 selected_model = st.sidebar.selectbox(
     "Select Model",
     list(models.keys()),
