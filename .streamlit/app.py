@@ -88,16 +88,87 @@ if selected_model == "Linear Regression":
         """
     )
 
+basic_features = [
+    "OverallQual",
+    "OverallCond",
+    "YearBuilt",
+    "YearRemodAdd"
+]
+
+living_features = [
+    "GrLivArea",
+    "1stFlrSF",
+    "2ndFlrSF",
+    "TotalBsmtSF"
+]
+
+room_features = [
+    "BedroomAbvGr",
+    "FullBath",
+    "HalfBath",
+    "TotRmsAbvGrd"
+]
+
+garage_features = [
+    "GarageCars",
+    "GarageArea"
+]
+
+location_features = [
+    "Neighborhood",
+    "MSZoning"
+]
+
+used_features = (
+    basic_features
+    + living_features
+    + room_features
+    + garage_features
+    + location_features
+    + [
+        "TotalSF",
+        "TotalBathrooms",
+        "HouseAge",
+        "RemodAge",
+        "TotalPorchSF"
+    ]
+)
+
+remaining_features = [
+    col for col in feature_columns
+    if col not in used_features
+]
+
 user_data = {}
+
+with st.sidebar.expander("🏡 Basic Property", expanded=True):
+    for col in basic_features:
+        # input code
+
+with st.sidebar.expander("📐 Living Area"):
+    for col in living_features:
+        # input code
+
+with st.sidebar.expander("🛏️ Rooms & Bathrooms"):
+    for col in room_features:
+        # input code
+
+with st.sidebar.expander("🚗 Garage & Parking"):
+    for col in garage_features:
+        # input code
+
+with st.sidebar.expander("📍 Location"):
+    for col in location_features:
+        # input code
+
+with st.sidebar.expander("⚙️ Advanced Features"):
+    for col in remaining_features:
+        # input code
 
 for col in feature_columns:
 
     if col in [
-       "TotalSF",
-       "TotalBathrooms",
-       "HouseAge",
-       "RemodAge",
-       "TotalPorchSF"
+       used_Features, remaining_features 
     ]:
        continue
         
@@ -108,7 +179,7 @@ for col in feature_columns:
     else:
          if col == "Id":
             user_data[col] = 1
-         else:
+         else:              
               user_data[col] = st.sidebar.number_input(col,value= default_value)
 
 # ==========================================
