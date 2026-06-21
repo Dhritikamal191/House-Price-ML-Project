@@ -69,8 +69,6 @@ st.divider()
 # INPUT SECTION
 # ==========================================
 
-st.sidebar.header("🏡 Property Information")
-
 selected_model = st.sidebar.selectbox(
     "Select Model",
     list(models.keys()),
@@ -87,6 +85,16 @@ if selected_model == "Linear Regression":
         the model may produce unstable predictions.
         """
     )
+
+st.sidebar.header("🏡 Property Information")
+
+st.sidebar.info(
+    f"Total Features: {len(feature_columns)}"
+)
+
+st.sidebar.markdown(
+    "Most features are pre-filled using dataset medians."
+)
 
 user_data = {}
 
