@@ -95,9 +95,7 @@ st.sidebar.info(
 )
 
 st.sidebar.markdown(
-    """
-    Most features are pre-filled using dataset medians.
-            """
+    f"Most features are pre-filled using dataset medians."
 )
 
 user_data = {}
