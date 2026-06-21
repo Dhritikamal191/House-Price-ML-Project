@@ -146,24 +146,24 @@ with st.sidebar.expander("🏡 Basic Property", expanded=True):
         # input code
 
 with st.sidebar.expander("📐 Living Area"):
-    for col in living_features:
-        # input code
+     for col in living_features:
+         # input code
 
 with st.sidebar.expander("🛏️ Rooms & Bathrooms"):
-    for col in room_features:
-        # input code
+     for col in room_features:
+         # input code
 
 with st.sidebar.expander("🚗 Garage & Parking"):
-    for col in garage_features:
-        # input code
+     for col in garage_features:
+         # input code
 
 with st.sidebar.expander("📍 Location"):
-    for col in location_features:
-        # input code
+     for col in location_features:
+         # input code
 
 with st.sidebar.expander("⚙️ Advanced Features"):
-    for col in remaining_features:
-        # input code
+     for col in remaining_features:
+         # input code
 
 for col in feature_columns:
 
