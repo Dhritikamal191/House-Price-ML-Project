@@ -128,12 +128,12 @@ with st.sidebar.expander(
      # FullBath
      # BedroomAbvGr
  
-with st.sidebar.expander(
-     "⚙️ Advanced Features",
-     expanded=False
-     ):
+     with st.sidebar.expander(
+          "⚙️ Advanced Features",
+          expanded=False
+          ):
 
-     # Remaining 70+ features
+          # Remaining 70+ features
 
 # ==========================================
 # DATAFRAME
