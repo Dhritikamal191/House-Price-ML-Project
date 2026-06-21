@@ -142,8 +142,8 @@ remaining_features = [
 user_data = {}
 
 with st.sidebar.expander("🏡 Basic Property", expanded=True):
-    for col in basic_features:
-        # input code
+     for col in basic_features:
+         # input code
 
 with st.sidebar.expander("📐 Living Area"):
      for col in living_features:
