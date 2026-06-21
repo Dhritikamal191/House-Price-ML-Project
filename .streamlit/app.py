@@ -109,31 +109,8 @@ for col in feature_columns:
          if col == "Id":
             user_data[col] = 1
          else:
-              user_data[col] = st.sidebar.number_input(col,value= default_value)
+              user_data[col] = st.number_input(col,value= default_value)
 
-st.sidebar.header("🏠 Property Features")
-
-with st.sidebar.expander(
-     "📌 Important Features",
-     expanded=True
-     ):
-
-     # Most influential features
-     # OverallQual
-     # GrLivArea
-     # GarageCars
-     # GarageArea
-     # YearBuilt
-     # TotalBsmtSF    
-     # FullBath
-     # BedroomAbvGr
- 
-     with st.sidebar.expander(
-          "⚙️ Advanced Features",
-          expanded=False
-          ):
-
-          # Remaining 70+ features
 
 # ==========================================
 # DATAFRAME
