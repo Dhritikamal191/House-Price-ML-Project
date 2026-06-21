@@ -114,26 +114,26 @@ for col in feature_columns:
 st.sidebar.header("🏠 Property Features")
 
 with st.sidebar.expander(
-    "📌 Important Features",
-    expanded=True
-):
+     "📌 Important Features",
+     expanded=True
+     ):
 
-    # Most influential features
-    # OverallQual
-    # GrLivArea
-    # GarageCars
-    # GarageArea
-    # YearBuilt
-    # TotalBsmtSF
-    # FullBath
-    # BedroomAbvGr
-
+     # Most influential features
+     # OverallQual
+     # GrLivArea
+     # GarageCars
+     # GarageArea
+     # YearBuilt
+     # TotalBsmtSF    
+     # FullBath
+     # BedroomAbvGr
+ 
 with st.sidebar.expander(
-    "⚙️ Advanced Features",
-    expanded=False
-):
+     "⚙️ Advanced Features",
+     expanded=False
+     ):
 
-    # Remaining 70+ features
+     # Remaining 70+ features
 
 # ==========================================
 # DATAFRAME
