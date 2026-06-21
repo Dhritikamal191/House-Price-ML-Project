@@ -88,7 +88,7 @@ if selected_model == "Linear Regression":
         """
     )
 
-with sidebar.expander(
+with st.sidebar.expander(
      "Configure Property Details", 
         expanded = False
 ):
