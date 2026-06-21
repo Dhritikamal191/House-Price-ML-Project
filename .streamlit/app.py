@@ -88,33 +88,28 @@ if selected_model == "Linear Regression":
         """
     )
 
-with st.sidebar.expander(
-     "Configure Property Details", 
-        expanded = False
-):
+user_data = {}
 
-     user_data = {}
+for col in feature_columns:
 
-     for col in feature_columns:
-
-         if col in [
-            "TotalSF",
-            "TotalBathrooms",
-            "HouseAge",
-            "RemodAge",
-            "TotalPorchSF"
-         ]:
-            continue
+    if col in [
+       "TotalSF",
+       "TotalBathrooms",
+       "HouseAge",
+       "RemodAge",
+       "TotalPorchSF"
+    ]:
+       continue
         
-         default_value = float(numeric_defaults.get(col,0))
+       default_value = float(numeric_defaults.get(col,0))
         
-         if col in category_mapping:
-            user_data[col] = st.sidebar.selectbox(col,category_mapping[col])
-         else:
-              if col == "Id":
-                 user_data[col] = 1
-              else:
-                   user_data[col] = st.number_input(col,value= default_value)
+       if col in category_mapping:
+          user_data[col] = st.sidebar.selectbox(col,category_mapping[col])
+       else:
+            if col == "Id":
+               user_data[col] = 1
+            else:
+                 user_data[col] = st.sidebar.expander.number_input(col,value= default_value)
 
 # ==========================================
 # DATAFRAME
