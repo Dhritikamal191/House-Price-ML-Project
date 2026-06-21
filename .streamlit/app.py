@@ -81,12 +81,46 @@ if selected_model == "Linear Regression":
 
     st.warning(
         """
-        Linear Regression is included as a baseline model.
+        • Linear Regression is included as a baseline model.
 
-        Due to one-hot encoding and extensive feature engineering,
+        • Due to one-hot encoding and extensive feature engineering,
         the model may produce unstable predictions.
         """
     )
+
+elif selected_model == "Lasso Regression":
+
+    st.warning("""
+     Lasso Regression
+
+    • Best performing model based on R² score.
+    • Automatically removes less important features.
+    • Can produce unstable predictions for unusual feature combinations.
+    • Negative house price predictions may occur for inputs outside the training distribution.
+    """)
+
+elif selected_model == "Ridge Regression":
+
+    st.info("""
+     Ridge Regression
+
+    • Uses L2 regularization to reduce overfitting.
+    • More stable than Linear Regression.
+    • Handles multicollinearity effectively.
+    • Provides consistent and reliable predictions across most property types.
+    """)
+
+elif selected_model == "Random Forest":
+
+    st.success("""
+     Random Forest
+
+    • Ensemble tree-based model.
+    • Captures complex non-linear relationships.
+    • Produces highly stable predictions.
+    • Less sensitive to extreme user inputs.
+    • Recommended model for deployment and real-world usage.
+    """)
 
 st.sidebar.header("🏡 Property Information")
 
