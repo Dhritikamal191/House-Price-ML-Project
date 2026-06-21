@@ -98,11 +98,11 @@ with st.sidebar.expander(
      for col in feature_columns:
 
          if col in [
-         "TotalSF",
-         "TotalBathrooms",
-         "HouseAge",
-         "RemodAge",
-         "TotalPorchSF"
+            "TotalSF",
+            "TotalBathrooms",
+            "HouseAge",
+            "RemodAge",
+            "TotalPorchSF"
          ]:
             continue
         
@@ -114,7 +114,7 @@ with st.sidebar.expander(
               if col == "Id":
                  user_data[col] = 1
               else:
-                   user_data[col] = st.sidebar.number_input(col,value= default_value)
+                   user_data[col] = st.number_input(col,value= default_value)
 
 # ==========================================
 # DATAFRAME
