@@ -346,7 +346,19 @@ if predict:
     st.plotly_chart(
     fig,
     use_container_width=True
-    )
+    )    
+
+
+    fig = px.scatter(y_test,predictions,alpha=0.6)
+
+    fig.update_layout(
+    [y_test.min(), y_test.max()],
+    [y_test.min(), y_test.max()],
+    'r--',title="Actual vs Predicted House Prices, x_title="Actual Sale Price",y_title="Predicted Sale Price")
+    linewidth=2
+)
+
+    st.plotly_chart(fig, use_container_width= True)
 
     report = pd.DataFrame({
 
