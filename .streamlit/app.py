@@ -48,8 +48,6 @@ Models Used:
 # KPI CARDS
 # ==========================================
 
-comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
-
 best_model_name = comparison.iloc[0,0]
 
 col1, col2, col3 = st.columns(3)
