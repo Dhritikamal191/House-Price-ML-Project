@@ -356,45 +356,7 @@ if predict:
     "📥 Download Prediction Report",
     report.to_csv(index=False),
     file_name="prediction_report.csv",
-    mime="text/csv")
-
-    import plotly.express as px
-
-    feature_importance = pd.DataFrame({
-    "Feature": feature_columns,
-    "Importance":model.feature_importances_
-    })
-
-    feature_importance = (
-    feature_importance
-    .sort_values(
-        by="Importance",
-        ascending=False
-    )
-    .head(10)
-    )
-
-    fig = px.bar(
-    feature_importance,
-    x="Importance",
-    y="Feature",
-    orientation="h",
-    color="Importance",
-    title="Top 10 Most Important Features",
-    labels={
-        "Importance": "Importance Score",
-        "Feature": "Feature"
-    },
-    template="plotly_white"
-    )
-
-    fig.update_layout(
-    height=600,
-    yaxis=dict(autorange="reversed"),
-    title_x=0.5
-    )
-
-    fig.show()
+    mime="text/csv")    
 
 # ==========================================
 # INPUT SUMMARY
