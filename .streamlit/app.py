@@ -441,7 +441,8 @@ with st.expander("📊 Model Comparison"):
      try:
          after_comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
          st.subheader("Model Comparison After Tuning")
-         st.dataframe(after_comaprison, use_container_width=True)
+         st.dataframe(after_comparison, use_container_width=True)
+
      except:
             pass
 
