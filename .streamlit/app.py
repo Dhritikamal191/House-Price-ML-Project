@@ -348,46 +348,6 @@ if predict:
     use_container_width=True
     )    
 
-    
-    fig = go.Figure()
-
-    fig.add_trace(
-    go.Scatter(
-        x=y_test,
-        y=predictions,
-        mode="markers",
-        name="Predictions",
-        marker=dict(
-            size=8,
-            opacity=0.6
-        )
-      )
-    )
-
-    fig.add_trace(
-    go.Scatter(
-        x=[y_test.min(), y_test.max()],
-        y=[y_test.min(), y_test.max()],
-        mode="lines",
-        name="Perfect Fit",
-        line=dict(
-            dash="dash",
-            width=3
-        )
-      )
-    )
-
-    fig.update_layout(
-    title="Actual vs Predicted House Prices",
-    xaxis_title="Actual Sale Price",
-    yaxis_title="Predicted Sale Price",
-    template="plotly_white",
-    height=600,
-    title_x=0.5
-    )
-
-    fig.show()
-
     report = pd.DataFrame({
 
     "PredictedPrice":[predictions]})
@@ -398,23 +358,23 @@ if predict:
     file_name="prediction_report.csv",
     mime="text/csv")
 
-import plotly.express as px
+    import plotly.express as px
 
-feature_importance = pd.DataFrame({
+    feature_importance = pd.DataFrame({
     "Feature": feature_columns,
-    "Importance": selected_model.feature_importances_
-})
+    "Importance":model.feature_importances_
+    })
 
-feature_importance = (
+    feature_importance = (
     feature_importance
     .sort_values(
         by="Importance",
         ascending=False
     )
     .head(10)
-)
+    )
 
-fig = px.bar(
+    fig = px.bar(
     feature_importance,
     x="Importance",
     y="Feature",
@@ -426,15 +386,15 @@ fig = px.bar(
         "Feature": "Feature"
     },
     template="plotly_white"
-)
+    )
 
-fig.update_layout(
+    fig.update_layout(
     height=600,
     yaxis=dict(autorange="reversed"),
     title_x=0.5
-)
+    )
 
-fig.show()
+    fig.show()
 
 # ==========================================
 # INPUT SUMMARY
@@ -520,6 +480,35 @@ with st.expander("📊 Model Comparison"):
          st.subheader("📊 Model Comparison After Tuning")
 
          st.dataframe(comparison,use_container_width=True)
+         import plotly.express as px
+
+         comparison = comparison.reset_index()
+
+         fig = px.bar(
+         comparison,
+         x="index",
+         y="R2",
+         text="R2",
+         color="R2",
+         title="Model Performance Comparison (R² Score)",
+         labels={
+         "index": "Model",
+         "R2": "R² Score"
+         },
+         template="plotly_white"
+         )
+
+         fig.update_traces(
+         texttemplate="%{text:.4f}",
+         textposition="outside"
+         )
+
+         fig.update_layout(
+         height=500,
+         title_x=0.5
+         )
+
+         fig.show()
 
      except:
             pass
