@@ -441,10 +441,12 @@ with st.expander("📊 Model Comparison"):
 
          st.subheader("📊 Model Comparison After Tuning")
 
-         st.dataframe(comparison,use_container_width=True)
+         st.dataframe
+(comparison,use_container_width=True)
+
          import plotly.express as px
 
-         comparison = comparison.reset_index()
+         comparison = reset_index()
 
          fig = px.bar(
          comparison,
