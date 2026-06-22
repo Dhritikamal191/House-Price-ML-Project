@@ -348,17 +348,45 @@ if predict:
     use_container_width=True
     )    
 
+    
+    fig = go.Figure()
 
-    fig = px.scatter(y_test,predictions,alpha=0.6)
+    fig.add_trace(
+    go.Scatter(
+        x=y_test,
+        y=predictions,
+        mode="markers",
+        name="Predictions",
+        marker=dict(
+            size=8,
+            opacity=0.6
+        )
+      )
+    )
+
+    fig.add_trace(
+    go.Scatter(
+        x=[y_test.min(), y_test.max()],
+        y=[y_test.min(), y_test.max()],
+        mode="lines",
+        name="Perfect Fit",
+        line=dict(
+            dash="dash",
+            width=3
+        )
+      )
+    )
 
     fig.update_layout(
-    [y_test.min(), y_test.max()],
-    [y_test.min(), y_test.max()],
-    'r--',title="Actual vs Predicted House Prices, x_title="Actual Sale Price",y_title="Predicted Sale Price")
-    linewidth=2
-)
+    title="Actual vs Predicted House Prices",
+    xaxis_title="Actual Sale Price",
+    yaxis_title="Predicted Sale Price",
+    template="plotly_white",
+    height=600,
+    title_x=0.5
+    )
 
-    st.plotly_chart(fig, use_container_width= True)
+    fig.show()
 
     report = pd.DataFrame({
 
