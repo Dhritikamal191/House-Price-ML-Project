@@ -438,42 +438,7 @@ with st.expander("📊 Model Comparison"):
     
      try:
          comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
-
-         st.subheader("📊 Model Comparison After Tuning")
-
-         st.dataframe
-(comparison,use_container_width=True)
-
-         import plotly.express as px
-
-         comparison = reset_index()
-
-         fig = px.bar(
-         comparison,
-         x="index",
-         y="R2",
-         text="R2",
-         color="R2",
-         title="Model Performance Comparison (R² Score)",
-         labels={
-         "index": "Model",
-         "R2": "R² Score"
-         },
-         template="plotly_white"
-         )
-
-         fig.update_traces(
-         texttemplate="%{text:.4f}",
-         textposition="outside"
-         )
-
-         fig.update_layout(
-         height=500,
-         title_x=0.5
-         )
-
-         fig.show()
-
+         
      except:
             pass
 
