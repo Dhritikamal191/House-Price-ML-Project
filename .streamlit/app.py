@@ -502,8 +502,8 @@ from datetime import datetime
 
 log = {
     "timestamp": datetime.now(),
-    "model": model_name,
-    "prediction": prediction
+    "model": selected_model,
+    "prediction": predictions
 }
 
 pd.DataFrame([log]).to_csv(
