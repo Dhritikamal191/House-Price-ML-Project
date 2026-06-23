@@ -497,3 +497,26 @@ st.dataframe(
     engineered_df,
     use_container_width=True
 )
+
+import mlflow
+
+mlflow.start_run()
+
+mlflow.log_param("model", "Lasso")
+mlflow.log_metric("r2", r2)
+mlflow.log_metric("rmse", rmse)
+
+mlflow.end_run()
+
+log = {
+    "timestamp": datetime.now(),
+    "model": model_name,
+    "prediction": prediction
+}
+
+pd.DataFrame([log]).to_csv(
+    "prediction_logs.csv",
+    mode="a",
+    header=False,
+    index=False
+)
