@@ -498,16 +498,6 @@ st.dataframe(
     use_container_width=True
 )
 
-import mlflow
-
-mlflow.start_run()
-
-mlflow.log_param("model", "Lasso")
-mlflow.log_metric("r2", r2)
-mlflow.log_metric("rmse", rmse)
-
-mlflow.end_run()
-
 log = {
     "timestamp": datetime.now(),
     "model": model_name,
