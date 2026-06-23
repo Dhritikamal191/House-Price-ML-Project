@@ -497,24 +497,3 @@ st.dataframe(
     engineered_df,
     use_container_width=True
 )
-
-from datetime import datetime
-
-model = models[selected_model]
-
-prediction = model.predict(input_df)[0]
-    
-predictions = np.clip(prediction, a_min=0, a_max=None)
-
-log = {
-    "timestamp": datetime.now(),
-    "model": selected_model,
-    "prediction": predictions
-}
-
-pd.DataFrame([log]).to_csv(
-    "prediction_logs.csv",
-    mode="a",
-    header=False,
-    index=False
-)
