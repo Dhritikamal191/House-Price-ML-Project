@@ -1,0 +1,42 @@
+data:
+  train_path: train.csv
+  test_path: test_csv
+  best_model: best_model.pkl
+  model_comparison_before: model_comparison_before_tuning.csv
+  model_comparison_after: model_comparison_after_tuning.csv
+  all_models: all_models.pkl
+  category_mapping: category_mapping.pkl
+  feature_columns: feature_columns.pkl
+  linear_regression_results: linear_regression_results.csv
+  numeric_default: numeric_defaults.pkl
+  submission: submission.csv
+  logs: training.log
+
+model:
+  random_state: 42
+  test_size: 0.2
+
+linear: 
+  n_jobs: -1
+
+ridge:
+  alpha: 1.0
+  alpha_values: [0.01, 0.1, 1, 10, 100]
+
+lasso:
+  alpha: 0.001
+  max_iter: 50000
+  alpha_values: [0.0001, 0.001, 0.01, 0.1, 1]
+  n_iter: 5
+
+random_forest:
+  n_estimators: 500
+  n_jobs: -1
+  n_iter: 20
+  cv: 5
+
+random_forest_tuned:
+  n_estimators: [100, 200, 300]
+  max_depth: [None, 10, 20, 30]
+  min_samples_split: [2, 5, 10]
+  min_samples_leaf: [1, 2, 4]
