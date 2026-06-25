@@ -7,6 +7,7 @@ import os
 import plotly.graph_objects as go
 from pathlib import Path
 from datetime import datetime
+from supabase import create_client
 
 # ==========================================
 # PAGE CONFIG
@@ -35,13 +36,10 @@ numeric_defaults = joblib.load(config["data"]["numeric_default"])
 
 models = joblib.load(config["data"]["all_models"])
 
-from supabase import create_client
-
-url = "https://supabase.com/dashboard/project/mfoauekyjbkppdyxwzfu/editor/17588?schema=public"
-
-key = "https://mfoauekyjbkppdyxwzfu.supabase.co/rest/v1/Prediction_logs"
-
-supabase = create_client(url, key)
+supabase = create_client(
+    st.secrets["SUPABASE_URL"],
+    st.secrets["SUPABASE_KEY"]
+)
 
 # ==========================================
 # HEADER
