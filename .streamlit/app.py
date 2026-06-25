@@ -363,24 +363,17 @@ if predict:
 
     report = pd.DataFrame({
 
-    "PredictedPrice":[predictions]})
- 
-    from datetime import datetime
-
+    "PredictedPrice":[predictions]}) 
+   
     prediction_log = pd.DataFrame({
     "Timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
     "Model": [selected_model],
     "Predicted Price": [float(predictions)]
     })
 
-    supabase.table
-    ("prediction_log").insert({
-    "timestamp": datetime.now().isoformat(),
-    "model": selected_model,
-    "predicted_price": float(predictions)
-    }).execute()
+    supabase.table("prediction_log").insert({"timestamp": datetime.now().isoformat(),"model": selected_model,"predicted_price": float(predictions)}).execute()
 
-    response = supabase.table("prediction_logs").select("*").execute()
+    response = supabase.table("prediction_log").select("*").execute()
 
     logs = response.data
 
