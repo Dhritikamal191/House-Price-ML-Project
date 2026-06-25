@@ -373,7 +373,8 @@ if predict:
     prediction_log.to_csv(
     prediction_path,
     mode="a",
-    header=not os.path.exists(prediction_path),
+    header=not os.path.exists
+    (prediction_path),
     index=False
 )
 
