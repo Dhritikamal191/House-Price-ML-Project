@@ -1,16 +1,16 @@
 data:
-  train_path: train.csv
-  test_path: test_csv
-  best_model: best_model.pkl
-  model_comparison_before: model_comparison_before_tuning.csv
-  model_comparison_after: model_comparison_after_tuning.csv
-  all_models: all_models.pkl
-  category_mapping: category_mapping.pkl
-  feature_columns: feature_columns.pkl
-  linear_regression_results: linear_regression_results.csv
-  numeric_default: numeric_defaults.pkl
-  submission: submission.csv
-  logs: training.log
+  train_path: data/train.csv
+  test_path: data/test_csv
+  best_model: models/best_model.pkl
+  model_comparison_before: data/model_comparison_before_tuning.csv
+  model_comparison_after: data/model_comparison_after_tuning.csv
+  all_models: models/all_models.pkl
+  category_mapping: models/category_mapping.pkl
+  feature_columns: models/feature_columns.pkl
+  linear_regression_results: data/linear_regression_results.csv
+  numeric_default: models/numeric_defaults.pkl
+  submission: data/submission.csv
+  logs: data/training.log
 
 model:
   random_state: 42
