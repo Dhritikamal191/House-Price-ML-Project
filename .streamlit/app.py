@@ -356,6 +356,26 @@ if predict:
     report = pd.DataFrame({
 
     "PredictedPrice":[predictions]})
+ 
+    from datetime import datetime
+
+    prediction_log = pd.DataFrame({
+    "Timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
+    "Model": [selected_model],
+    "Predicted Price": [float(prediction)]
+    })
+
+    prediction_path = config["data"]["prediction_log"]
+
+    os.makedirs
+(os.path.dirname(prediction_path), exist_ok=True)
+
+    prediction_log.to_csv(
+    prediction_path,
+    mode="a",
+    header=not os.path.exists(prediction_path),
+    index=False
+)
 
     st.download_button(
     "📥 Download Prediction Report",
