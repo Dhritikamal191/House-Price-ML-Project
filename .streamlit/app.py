@@ -362,7 +362,7 @@ if predict:
     prediction_log = pd.DataFrame({
     "Timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
     "Model": [selected_model],
-    "Predicted Price": [float(prediction)]
+    "Predicted Price": [float(predictions)]
     })
 
     prediction_path = config["data"]["prediction_log"]
