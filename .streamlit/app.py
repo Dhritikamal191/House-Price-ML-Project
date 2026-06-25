@@ -5,7 +5,7 @@ import joblib
 import yaml
 import os
 import plotly.graph_objects as go
-
+from pathlib import Path
 # ==========================================
 # PAGE CONFIG
 # ==========================================
@@ -19,8 +19,8 @@ st.set_page_config(
 # ==========================================
 # LOAD FILES
 # ==========================================
-
-with open("config.yaml","r") as f:
+BASE_DIR = Path(__file__).resolve().parent
+with open(BASE_DIR/"config.yaml","r") as f:
     config = yaml.safe_load(f)
     
 best_model = joblib.load(config["models"]["best_model"])
