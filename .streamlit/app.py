@@ -6,6 +6,8 @@ import yaml
 import os
 import plotly.graph_objects as go
 from pathlib import Path
+from datetime import datetime
+
 # ==========================================
 # PAGE CONFIG
 # ==========================================
@@ -32,6 +34,14 @@ category_mapping = joblib.load(config["data"]["category_mapping"])
 numeric_defaults = joblib.load(config["data"]["numeric_default"])
 
 models = joblib.load(config["data"]["all_models"])
+
+from supabase import create_client
+
+url = "https://supabase.com/dashboard/project/mfoauekyjbkppdyxwzfu/editor/17588?schema=public"
+
+key = "https://mfoauekyjbkppdyxwzfu.supabase.co/rest/v1/Prediction_logs"
+
+supabase = create_client(url, key)
 
 # ==========================================
 # HEADER
@@ -365,17 +375,12 @@ if predict:
     "Predicted Price": [float(predictions)]
     })
 
-    prediction_path = config["data"]["prediction_log"]
-
-    os.makedirs(os.path.dirname(prediction_path),exist_ok=True)
-
-    prediction_log.to_csv(
-    prediction_path,
-    mode="a",
-    header=not os.path.exists
-    (prediction_path),
-    index=False
-    )
+    supabase.table
+    ("prediction_log").insert({
+    "timestamp": datetime.now().isoformat(),
+    "model": selected_model,
+    "predicted_price": float(predictions)
+    }).execute()
 
     st.download_button(
     "📥 Download Prediction Report",
