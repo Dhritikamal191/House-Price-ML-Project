@@ -21,7 +21,7 @@ st.set_page_config(
 # ==========================================
 
 with open("config.yaml","r") as f:
-     config = yaml.safe_load(f)
+    config = yaml.safe_load(f)
     
 best_model = joblib.load(config["models"]["best_model"])
 
