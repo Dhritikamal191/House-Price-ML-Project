@@ -23,15 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent
 with open(BASE_DIR/"config.yaml","r") as f:
     config = yaml.safe_load(f)
     
-best_model = joblib.load(config["models"]["best_model"])
+best_model = joblib.load(config["data"]["best_model"])
 
-feature_columns = joblib.load(config["models"]["feature_columns"])
+feature_columns = joblib.load(config["data"]["feature_columns"])
 
-category_mapping = joblib.load(config["models"]["category_mapping"])
+category_mapping = joblib.load(config["data"]["category_mapping"])
 
-numeric_defaults = joblib.load(config["models"]["numeric_default"])
+numeric_defaults = joblib.load(config["data"]["numeric_default"])
 
-models = joblib.load(config["models"]["all_models"])
+models = joblib.load(config["data"]["all_models"])
 
 # ==========================================
 # HEADER
