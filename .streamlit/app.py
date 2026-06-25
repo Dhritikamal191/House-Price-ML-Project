@@ -368,7 +368,7 @@ if predict:
     prediction_path = config["data"]["prediction_log"]
 
     os.makedirs
-(os.path.dirname(prediction_path), exist_ok=True)
+(os.path.dirname(prediction_path),exist_ok==True)
 
     prediction_log.to_csv(
     prediction_path,
