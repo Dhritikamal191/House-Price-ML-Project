@@ -382,6 +382,12 @@ if predict:
     "predicted_price": float(predictions)
     }).execute()
 
+    response = supabase.table("prediction_logs").select("*").execute()
+
+    logs = response.data
+
+    st.dataframe(logs)
+
     st.download_button(
     "📥 Download Prediction Report",
     report.to_csv(index=False),
