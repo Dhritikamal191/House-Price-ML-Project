@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import yaml
+import os
 import plotly.graph_objects as go
 
 # ==========================================
@@ -18,15 +20,18 @@ st.set_page_config(
 # LOAD FILES
 # ==========================================
 
-model = joblib.load("models/best_model.pkl")
+with open("config.yaml","r") as f:
+     config = yaml.safe_load(f)
+    
+best_model = joblib.load(config["models"]["best_model"])
 
-feature_columns = joblib.load("models/feature_columns.pkl")
+feature_columns = joblib.load(config["models"]["feature_columns"])
 
-category_mapping = joblib.load("models/category_mapping.pkl")
+category_mapping = joblib.load(config["models"]["category_mapping"])
 
-numeric_defaults = joblib.load("models/numeric_defaults.pkl")
+numeric_defaults = joblib.load(config["models"]["numeric_default"])
 
-models = joblib.load("models/all_models.pkl")
+models = joblib.load(config["models"]["all_models"])
 
 # ==========================================
 # HEADER
@@ -48,7 +53,7 @@ Models Used:
 # KPI CARDS
 # ==========================================
 
-comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
+comparison = pd.read_csv(config["data"]["model_comparison_after"])
 
 best_model_name = comparison.iloc[0,0]
 
@@ -415,7 +420,7 @@ with st.expander("📌 Project Information"):
 
 with st.expander("📊 Model Comparison"):
      try:
-         comparison = pd.read_csv("data/model_comparison_before_tuning.csv")
+         comparison = pd.read_csv(config["data"]["model_comparison_before"])
 
          st.subheader("📊 Model Comparison Before Tuning")
 
@@ -432,16 +437,15 @@ with st.expander("📊 Model Comparison"):
      Therefore, Ridge Regression, Lasso Regression, and Random Forest were preferred for final model selection.
      """)
 
-     linear = pd.read_csv("data/linear_regression_results.csv") 
+     linear = pd.read_csv(config["data"]["linear_regression_results"]) 
 
      st.subheader("Linear Regression Baseline Performance")
 
      st.dataframe(linear, use_container_width=True)
     
      try:
-         after_comparison = pd.read_csv("data/model_comparison_after_tuning.csv")
          st.subheader("Model Comparison After Tuning")
-         st.dataframe(after_comparison, use_container_width=True)
+         st.dataframe(comparison, use_container_width=True)
 
      except:
             pass
