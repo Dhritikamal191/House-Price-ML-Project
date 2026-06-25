@@ -11,7 +11,7 @@ data:
   numeric_default: models/numeric_defaults.pkl
   submission: data/submission.csv
   training_log: data/training.log
-  prediction_log: data/predictions.csv
+  Prediction_logs: data/predictions.csv
   
 
 model:
