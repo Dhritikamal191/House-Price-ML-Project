@@ -37,7 +37,7 @@ numeric_defaults = joblib.load(config["data"]["numeric_default"])
 models = joblib.load(config["data"]["all_models"])
 
 url = st.secrets["SUPABASE_URL"],
-Key = st.secrets["SUPABASE_KEY"]
+key = st.secrets["SUPABASE_KEY"]
 
 supabase = create_client(url, key)
 
