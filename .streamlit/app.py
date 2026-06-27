@@ -381,7 +381,7 @@ if predict:
 
     st.download_button(
     "📥 Download Prediction Report",
-    st.dataframe(logs).to_csv(index=False),
+    response.to_csv(index=False),
     file_name="prediction_report.csv",
     mime="text/csv")    
 
