@@ -23,10 +23,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          cd .streamlit
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Check App
         run: |
+          cd .streamlit
           python -m py_compile app.py
           python -m py_compile train_models.py
