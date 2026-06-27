@@ -381,7 +381,7 @@ if predict:
 
     st.download_button(
     "📥 Download Prediction Report",
-    logs.to_csv(index=False),
+    logs.to_csv(index=True),
     file_name="prediction_report.csv",
     mime="text/csv")    
 
