@@ -378,7 +378,18 @@ if predict:
     logs = response.data
 
     st.dataframe(logs)
-   
+
+    logs_df = pd.DataFrame(logs)
+
+    csv = logs_df.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+    label="📥 Download Prediction Logs",
+    data=csv,
+    file_name="prediction_logs.csv",
+    mime="text/csv"
+    )
+
 # ==========================================
 # INPUT SUMMARY
 # ==========================================
