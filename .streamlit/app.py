@@ -390,9 +390,9 @@ if predict:
 
     if not logs.empty:
        total_predictions = len(logs)
-       avg_price = logs["PredictedPrice"].mean()
-       max_price = logs["PredictedPrice"].max()
-       min_price = logs["PredictedPrice"].min()
+       avg_price = logs["predicted_price"].mean()
+       max_price = logs["predicted_price"].max()
+       min_price = logs["predicted_price"].min()
 
        from datetime import date
 
