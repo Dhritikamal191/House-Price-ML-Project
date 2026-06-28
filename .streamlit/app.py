@@ -417,6 +417,8 @@ if predict:
        max_price = logs_df["predicted_price"].max()
        min_price = logs_df["predicted_price"].min()
 
+       from datetime import date
+
        logs_df["timestamp"] = pd.to_datetime(logs_df["timestamp"],
 errors="coerce")
 
@@ -427,7 +429,7 @@ errors="coerce")
 
        st.metric("💰 Average Prediction Today",f"${avg_prediction_today:,.0f}")
 
-       from datetime import datetime, timedelta
+       from datetime import datetime, timedelta, timezone
 
        week_start = datetime.now(timezone.utc) -timedelta(days=7)
 
