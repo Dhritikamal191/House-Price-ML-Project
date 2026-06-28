@@ -389,7 +389,7 @@ if predict:
     )
 
     if not logs_df.empty:
-       total_predictions = len(logs)
+       total_predictions = len(logs_df)
        avg_price = logs["predicted_price"].mean()
        max_price = logs["predicted_price"].max()
        min_price = logs["predicted_price"].min()
