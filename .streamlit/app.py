@@ -471,14 +471,14 @@ errors="coerce")
        c4.metric("Lowest",
               f"${min_price:,.0f}")
 
-       logs_df["prediction_time"] = pd.to_datetime(logs_df["prediction_time"])
+       logs_df["timestamp"] = pd.to_datetime(logs_df["timestamp"])
 
        model_count = logs_df["model"].value_counts()
 
        col1, col2= st.columns(2)
        with col1:
             st.line_chart(logs_df.set_index(
-"prediction_time")["predicted_price"])
+"timestamp")["predicted_price"])
 
        with col2:
             st.bar_chart(model_count)
