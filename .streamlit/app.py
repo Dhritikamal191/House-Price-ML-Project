@@ -377,7 +377,7 @@ if predict:
     "timestamp": datetime.now().isoformat(),
     "model": selected_model,
     "predicted_price": float(predictions),
-    "lot_area": int(LotArea),
+    "lot_area": int(lot_area),
     "prediction_timestamp": datetime.now().isoformat(),
     "year_built": int(YearBuilt),
     "house_age": current_year - int(YearBuilt),
