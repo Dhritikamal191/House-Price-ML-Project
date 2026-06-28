@@ -394,6 +394,9 @@ if predict:
        max_price = logs_df["predicted_price"].max()
        min_price = logs_df["predicted_price"].min()
 
+       logs_df["prediction_time"] = pd.to_datetime(logs_df["prediction_time"],
+errors="coerce")
+
        from datetime import date
 
        today_df = logs_df[
