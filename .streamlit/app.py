@@ -396,6 +396,49 @@ if predict:
        max_price = logs["PredictedPrice"].max()
        min_price = logs["PredictedPrice"].min()
 
+       from datetime import date
+
+       today_df = logs_df[
+    logs_df["prediction_time"].dt.date == date.today()]
+
+       avg_prediction_today = today_df["predicted_price"].mean()
+
+       st.metric("💰 Average Prediction Today",f"${avg_prediction_today:,.0f}")
+
+       from datetime import datetime, timedelta
+
+       week_start = datetime.now() - timedelta(days=7)
+
+       week_df = logs_df[
+    logs_df["prediction_time"] >= week_start]
+
+       st.metric("📅 Predictions This Week", len(week_df))
+
+       avg_lot = logs_df["lot_area"].mean()
+
+       st.metric("📊 Average Lot Area", f"{avg_lot:,.0f} sq ft")
+
+       current_year = datetime.now().year
+
+       logs_df["house_age"] = current_year - logs_df["year_built"]
+
+       avg_age = logs_df["house_age"].mean()
+
+       st.metric("🏠 Average House Age", f"{avg_age:.1f} years")
+
+       top_model = logs_df["model_name"].mode()[0]
+
+       st.metric("⭐ Most Used Model", top_model)
+
+       avg_latency = logs_df["latency_ms"].mean()
+
+       st.metric("⏱ Average Prediction Latency",f"{avg_latency:.0f} ms")
+
+       import time
+
+       start = time.time()
+
+       latency = (time.time() - start) * 1000
        c1,c2,c3,c4 = st.columns(4)
 
        c1.metric("Predictions", total_predictions)
@@ -410,13 +453,15 @@ if predict:
               f"${min_price:,.0f}")
 
        logs["Timestamp"] = pd.to_datetime(logs["Timestamp"])
-
-       st.line_chart(logs.set_index(
-"Timestamp"["PredictedPrice"])
-
        model_count = logs["Model"].value_counts()
 
-       st.bar_chart(model_count)
+       col1, col2= st.columns(2)
+       with col1:
+            st.line_chart(logs.set_index(
+"Timestamp"["PredictedPrice"])
+
+       with col2:
+            st.bar_chart(model_count)
 
 # ==========================================
 # INPUT SUMMARY
