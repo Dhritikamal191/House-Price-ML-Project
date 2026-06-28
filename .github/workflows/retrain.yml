@@ -1,9 +1,8 @@
-name: Weekly Model Retraining
+name: Automated Model Retraining
 
 on:
   schedule:
-    # Every Sunday at 12:00 UTC
-    - cron: "0 0 1 * *"
+    - cron: "0 0 * * 0"   # Every Sunday
 
   workflow_dispatch:
 
@@ -14,35 +13,49 @@ jobs:
 
     steps:
 
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
 
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r .streamlit/requirements.txt
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r .streamlit/requirements.txt
 
-      - name: Retrain Model
-        run: |
-          python .streamlit/train_models.py
+    - name: Verify Dataset
+      run: |
+        if [ ! -f data/train.csv ]; then
+          echo "Dataset not found!"
+          exit 1
+        fi
 
-      - name: Commit Updated Models
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+    - name: Retrain Model
+      run: |
+        python .streamlit/train_models.py
 
-          git add models/
-          git add mlruns/
-          git add mlflow.db
+    - name: Check for Updated Models
+      id: check_changes
+      run: |
+        git diff --quiet models/ || echo "changed=true" >> $GITHUB_OUTPUT
 
-          git commit -m "Automatic weekly model retraining" || echo "No changes"
+    - name: Commit Updated Models
+      if: steps.check_changes.outputs.changed == 'true'
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
 
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        git add models/
+        git add mlflow.db
+        git add mlruns/
+
+        git commit -m "Automatic weekly retraining"
+
+    - name: Push Changes
+      if: steps.check_changes.outputs.changed == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
