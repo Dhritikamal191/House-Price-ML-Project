@@ -417,13 +417,8 @@ if predict:
        max_price = logs_df["predicted_price"].max()
        min_price = logs_df["predicted_price"].min()
 
-       logs_df["prediction_time"] = pd.to_datetime(logs_df["prediction_time"],
+       logs_df["timestamp"] = pd.to_datetime(logs_df["timestamp"],
 errors="coerce")
-
-       from datetime import date
-    
-       logs_df["timestamp"] = pd.to_datetime(
-    logs_df["timestamp"],errors="coerce")
 
        today_df = logs_df[
     logs_df["timestamp"].dt.date == date.today()]
@@ -434,7 +429,7 @@ errors="coerce")
 
        from datetime import datetime, timedelta
 
-       week_start = datetime.now() - timedelta(days=7)
+       week_start = datetime.now(timezone.utc) -timedelta(days=7)
 
        week_df = logs_df[
     logs_df["timestamp"] >= week_start]
