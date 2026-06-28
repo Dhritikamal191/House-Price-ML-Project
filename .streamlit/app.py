@@ -431,7 +431,7 @@ errors="coerce")
 
        st.metric("⭐ Most Used Model", top_model)
 
-       avg_latency = logs_df["latency_ms"].mean()
+       avg_latency = logs_df["prediction_latency_ms"].mean()
 
        st.metric("⏱ Average Prediction Latency",f"{avg_latency:.0f} ms")
 
