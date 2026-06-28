@@ -380,7 +380,7 @@ if predict:
     "lot_area": int(user_data["LotArea"]),
     "prediction_timestamp": datetime.now().isoformat(),
     "year_built": int(user_data["YearBuilt"]),
-    "house_age": current_year - int(YearBuilt),
+    "house_age": current_year - int(user_data["YearBuilt"]),
     "prediction_latency_ms": round(latency, 2),
     "overall_qual": int(user_data["OverallQual"]),
     "garage_cars": int(user_data["GarageCars"]),
