@@ -373,11 +373,22 @@ if predict:
 
     current_year = datetime.now().year
 
-    supabase.table("Prediction_logs")
-.insert({"timestamp":datetime.now().isoformat(),"model": selected_model,"predicted_price": float(prediction[0]),"lot_area":int(LotArea),"prediction_timestamp":datetime.now().isoformat(),"year_built": int(YearBuilt),
-"house_age": current_year - int(YearBuilt),
-"prediction_latency_ms": round(latency, 2),
-"overall_qual": int(OverallQual), "garage_cars": int(GarageCars),"gr_liv_area": int(GrLivArea),"total_bsmt_sf": int(TotalBsmtSF),"status": "Success", "error_message": None}).execute()
+    supabase.table("Prediction_logs").insert({
+    "timestamp": datetime.now().isoformat(),
+    "model": selected_model,
+    "predicted_price": float(prediction[0]),
+    "lot_area": int(LotArea),
+    "prediction_timestamp": datetime.now().isoformat(),
+    "year_built": int(YearBuilt),
+    "house_age": current_year - int(YearBuilt),
+    "prediction_latency_ms": round(latency, 2),
+    "overall_qual": int(OverallQual),
+    "garage_cars": int(GarageCars),
+    "gr_liv_area": int(GrLivArea),
+    "total_bsmt_sf": int(TotalBsmtSF),
+    "status": "Success",
+    "error_message": None
+}).execute()
 
     prediction_log = pd.DataFrame({
     "Timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
@@ -448,12 +459,7 @@ errors="coerce")
        avg_latency = logs_df["prediction_latency_ms"].mean()
 
        st.metric("⏱ Average Prediction Latency",f"{avg_latency:.0f} ms")
-
-       import time
-
-       start = time.time()
-
-       latency = (time.time() - start) * 1000
+       
        c1,c2,c3,c4 = st.columns(4)
 
        c1.metric("Predictions", total_predictions)
