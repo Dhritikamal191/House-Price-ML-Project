@@ -371,13 +371,13 @@ if predict:
     "Predicted Price": [float(predictions)]
     })
     
-    response = supabase.table("Prediction_logs").select("*")limit(20).execute()
+    response = supabase.table("Prediction_logs").select("*").order("prediction_time",desc=True).limit(20).execute()
 
     logs = response.data
 
     st.dataframe(logs)
 
-    logs_df = pd.DataFrame(logs)
+    logs_df = pd.DataFrame(response.data)
 
     csv = logs_df.to_csv(index=False).encode("utf-8")
 
