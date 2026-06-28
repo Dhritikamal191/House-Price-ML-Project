@@ -421,6 +421,9 @@ if predict:
 errors="coerce")
 
        from datetime import date
+    
+       logs_df["timestamp"] = pd.to_datetime(
+    logs_df["timestamp"],errors="coerce")
 
        today_df = logs_df[
     logs_df["timestamp"].dt.date == date.today()]
