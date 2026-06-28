@@ -456,7 +456,7 @@ if predict:
        col1, col2= st.columns(2)
        with col1:
             st.line_chart(logs.set_index(
-"Timestamp"["PredictedPrice"])
+"Timestamp"["PredictedPrice"]))
 
        with col2:
             st.bar_chart(model_count)
