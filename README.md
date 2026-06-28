@@ -4,15 +4,15 @@
 
 [![Supabase](https://img.shields.io/badge/Supabase-Prediction%20Logging-green)](https://supabase.com/dashboard/project/mfoauekyjbkppdyxwzfu/editor/17588)
 
-🏡 House Price Prediction using Machine Learning & MLOps
+# 🏡 House Price Prediction using Machine Learning & MLOps
 
-Overview
+### Overview
 
 This project is an end-to-end Machine Learning and MLOps application that predicts residential house prices using the Ames Housing dataset. It combines advanced feature engineering, multiple regression models, experiment tracking, prediction logging, and an interactive Streamlit dashboard to simulate a production-ready ML system.
 
 ---
 
-Features
+### Features
 
 - Interactive Streamlit Web Application
 - Multiple Machine Learning Models
@@ -30,9 +30,9 @@ Features
 
 ---
 
-Tech Stack
+### Tech Stack
 
-Machine Learning
+#### Machine Learning
 
 - Python
 - Scikit-learn
@@ -40,13 +40,13 @@ Machine Learning
 - NumPy
 - Joblib
 
-Visualization
+#### Visualization
 
 - Plotly
 - Matplotlib
 - Streamlit
 
-MLOps
+#### MLOps
 
 - MLflow
 - Docker
@@ -55,7 +55,7 @@ MLOps
 
 ---
 
-Dataset
+### Dataset
 
 Ames Housing Dataset
 
@@ -66,7 +66,7 @@ Ames Housing Dataset
 
 ---
 
-Feature Engineering
+### Feature Engineering
 
 Additional engineered features include:
 
@@ -80,7 +80,7 @@ These engineered features improve model performance and capture important proper
 
 ---
 
-Machine Learning Models
+### Machine Learning Models
 
 Model| Purpose
 Linear Regression| Baseline Model
@@ -92,7 +92,7 @@ The best-performing model is automatically saved for deployment.
 
 ---
 
-MLflow Experiment Tracking
+### MLflow Experiment Tracking
 
 Each training run logs:
 
@@ -105,7 +105,7 @@ Each training run logs:
 
 ---
 
-Prediction Monitoring
+### Prediction Monitoring
 
 Every prediction is automatically stored in Supabase with:
 
@@ -125,7 +125,7 @@ Every prediction is automatically stored in Supabase with:
 
 ---
 
-Monitoring Dashboard
+### Monitoring Dashboard
 
 The Streamlit dashboard includes:
 
@@ -146,7 +146,7 @@ The Streamlit dashboard includes:
 
 ---
 
-Project Structure
+### Project Structure
 
 House-Price-Prediction/
 │
@@ -166,7 +166,7 @@ House-Price-Prediction/
 
 ---
 
-Installation
+### Installation
 
 git clone <repository-url>
 
@@ -178,7 +178,7 @@ streamlit run app.py
 
 ---
 
-Docker
+### Docker
 
 docker build -t house-price-app .
 
@@ -186,7 +186,7 @@ docker run -p 8501:8501 house-price-app
 
 ---
 
-CI/CD
+### CI/CD
 
 GitHub Actions automatically:
 
@@ -196,7 +196,7 @@ GitHub Actions automatically:
 
 ---
 
-Future Improvements
+### Future Improvements
 
 - FastAPI REST API
 - Cloud MLflow Deployment
@@ -207,7 +207,7 @@ Future Improvements
 
 ---
 
-Author
+### Author
 
 Dhritikamal Das
 
@@ -215,6 +215,6 @@ M.Sc. MACS | Data Analyst | Machine Learning Enthusiast
 
 ---
 
-License
+### License
 
 This project is intended for educational and portfolio purposes.
