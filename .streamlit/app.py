@@ -383,7 +383,6 @@ if predict:
     "model": selected_model,
     "predicted_price": float(predictions),
     "lot_area": int(user_data["LotArea"]),
-    "prediction_timestamp": datetime.now().isoformat(),
     "year_built": int(user_data["YearBuilt"]),
     "house_age": current_year - int(user_data["YearBuilt"]),
     "prediction_latency_ms": round(latency, 2),
@@ -424,7 +423,7 @@ errors="coerce")
        from datetime import date
 
        today_df = logs_df[
-    logs_df["prediction_time"].dt.date == date.today()]
+    logs_df["timestamp"].dt.date == date.today()]
 
        avg_prediction_today = today_df["predicted_price"].mean()
 
@@ -435,7 +434,7 @@ errors="coerce")
        week_start = datetime.now() - timedelta(days=7)
 
        week_df = logs_df[
-    logs_df["prediction_time"] >= week_start]
+    logs_df["timestamp"] >= week_start]
 
        st.metric("📅 Predictions This Week", len(week_df))
 
