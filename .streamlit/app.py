@@ -388,7 +388,7 @@ if predict:
     mime="text/csv"
     )
 
-    if not logs.empty:
+    if not logs_df.empty:
        total_predictions = len(logs)
        avg_price = logs["predicted_price"].mean()
        max_price = logs["predicted_price"].max()
