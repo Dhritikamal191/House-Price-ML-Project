@@ -427,7 +427,7 @@ errors="coerce")
 
        st.metric("🏠 Average House Age", f"{avg_age:.1f} years")
 
-       top_model = logs_df["model_name"].mode()[0]
+       top_model = logs_df["model"].mode()[0]
 
        st.metric("⭐ Most Used Model", top_model)
 
