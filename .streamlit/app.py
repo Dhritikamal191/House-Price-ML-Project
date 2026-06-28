@@ -371,7 +371,7 @@ if predict:
     "Predicted Price": [float(predictions)]
     })
     
-    response = supabase.table("Prediction_logs").select("*").order("prediction_time",desc=True).limit(20).execute()
+    response = supabase.table("Prediction_logs").select("*").limit(20).execute()
 
     logs = response.data
 
