@@ -370,9 +370,7 @@ if predict:
     "Model": [selected_model],
     "Predicted Price": [float(predictions)]
     })
-
-    supabase.table("Prediction_logs").insert({"timestamp": datetime.now().isoformat(),"model": selected_model,"predicted_price": float(predictions)}).execute()
-
+    
     response = supabase.table("Prediction_logs").select("*").execute()
 
     logs = response.data
