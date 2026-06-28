@@ -373,6 +373,11 @@ if predict:
 
     current_year = datetime.now().year
 
+    prediction_log = pd.DataFrame({
+    "Timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
+    "Model": [selected_model],
+    "Predicted Price": [float(predictions)]
+    })
     supabase.table("Prediction_logs").insert({
     "timestamp": datetime.now().isoformat(),
     "model": selected_model,
@@ -390,12 +395,6 @@ if predict:
     "error_message": None
 }).execute()
 
-    prediction_log = pd.DataFrame({
-    "Timestamp": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-    "Model": [selected_model],
-    "Predicted Price": [float(predictions)]
-    })
-    
     response = supabase.table("Prediction_logs").select("*").limit(20).execute()
 
     logs = response.data
