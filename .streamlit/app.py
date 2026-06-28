@@ -390,6 +390,34 @@ if predict:
     mime="text/csv"
     )
 
+    if not logs.empty:
+       total_predictions = len(logs)
+       avg_price = logs["PredictedPrice"].mean()
+       max_price = logs["PredictedPrice"].max()
+       min_price = logs["PredictedPrice"].min()
+
+       c1,c2,c3,c4 = st.columns(4)
+
+       c1.metric("Predictions", total_predictions)
+
+       c2.metric("Average Price",
+              f"${avg_price:,.0f}")
+
+       c3.metric("Highest",
+              f"${max_price:,.0f}")
+
+       c4.metric("Lowest",
+              f"${min_price:,.0f}")
+
+       logs["Timestamp"] = pd.to_datetime(logs["Timestamp"])
+
+       st.line_chart(logs.set_index(
+"Timestamp"["PredictedPrice"])
+
+       model_count = logs["Model"].value_counts()
+
+       st.bar_chart(model_count)
+
 # ==========================================
 # INPUT SUMMARY
 # ==========================================
