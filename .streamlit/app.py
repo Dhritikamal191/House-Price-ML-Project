@@ -376,7 +376,7 @@ if predict:
     supabase.table("Prediction_logs").insert({
     "timestamp": datetime.now().isoformat(),
     "model": selected_model,
-    "predicted_price": float(predictions[0]),
+    "predicted_price": float(predictions),
     "lot_area": int(LotArea),
     "prediction_timestamp": datetime.now().isoformat(),
     "year_built": int(YearBuilt),
