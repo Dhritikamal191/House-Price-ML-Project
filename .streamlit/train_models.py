@@ -533,8 +533,22 @@ if os.path.exists(best_model_path):
 
         joblib.dump(best_final_model, best_model_path)
 
-        print("✅ Better model found. best_model.pkl updated.")
+        mlflow.log_param("Best Model", best_final_name)
+        mlflow.log_metric("Best R2", best_final_r2)
+        mlflow.set_tag("Model Updated", "Yes")
 
+        print("Better model found. Model updated.")
+
+    else:
+
+         mlflow.log_param("Best Model", best_final_name)
+         mlflow.log_metric("Best R2", best_final_r2)
+         mlflow.set_tag("Model Updated", "No")
+ 
+         print("Existing model retained.")
+
+         print("✅ Better model found. best_model.pkl updated.")
+         
     else:
 
         print("ℹ Existing model retained.")
@@ -542,6 +556,10 @@ if os.path.exists(best_model_path):
 else:
 
     joblib.dump(best_final_model, best_model_path)
+
+    mlflow.log_param("Best Model", best_final_name)
+    mlflow.log_metric("Best R2", best_final_r2)
+    mlflow.set_tag("Model Updated", "First Model")
 
     print("✅ First model saved.")
 
