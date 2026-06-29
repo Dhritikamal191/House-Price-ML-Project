@@ -549,10 +549,6 @@ if os.path.exists(best_model_path):
 
          print("✅ Better model found. best_model.pkl updated.")
          
-    else:
-
-        print("ℹ Existing model retained.")
-
 else:
 
     joblib.dump(best_final_model, best_model_path)
