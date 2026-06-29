@@ -484,8 +484,6 @@ print("model_comparison_after_tuning.csv")
 
 joblib.dump(X.columns.tolist(),config["data"]["feature_columns"])
 
-import os
-
 best_model_path = config["data"]["best_model"]
 
 if os.path.exists(best_model_path):
@@ -522,9 +520,30 @@ joblib.dump(category_mapping, config["data"]["category_mapping"])
 # SAVE FINAL BEST MODEL
 # ==========================================
 
-deployment_model = tuned_models["Random Forest"].best_estimator_
+best_model_path = config["data"]["best_model"]
 
-joblib.dump(deployment_model, config["data"]["best_model"])
+if os.path.exists(best_model_path):
+
+    old_model = joblib.load(best_model_path)
+
+    old_predictions = old_model.predict(X_test)
+    old_r2 = r2_score(y_test, old_predictions)
+
+    if best_final_r2 > old_r2:
+
+        joblib.dump(best_final_model, best_model_path)
+
+        print("✅ Better model found. best_model.pkl updated.")
+
+    else:
+
+        print("ℹ Existing model retained.")
+
+else:
+
+    joblib.dump(best_final_model, best_model_path)
+
+    print("✅ First model saved.")
 
 all_models= {"Linear Regression": trained_models["Linear Regression"], "Ridge Regression": ridge_search.best_estimator_, "Lasso Regression": lasso_search.best_estimator_, "Random Forest": rf_search.best_estimator_}
 
