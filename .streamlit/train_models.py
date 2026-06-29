@@ -484,6 +484,33 @@ print("model_comparison_after_tuning.csv")
 
 joblib.dump(X.columns.tolist(),config["data"]["feature_columns"])
 
+import os
+
+best_model_path = config["data"]["best_model"]
+
+if os.path.exists(best_model_path):
+
+    old_pipeline = joblib.load(best_model_path)
+
+    old_predictions = old_pipeline.predict(X_test)
+    old_r2 = r2_score(y_test, old_predictions)
+
+    if best_final_r2 > old_r2:
+
+        joblib.dump(best_final_model, best_model_path)
+
+        print("✅ Better model found. Best model updated.")
+
+    else:
+
+        print("ℹ Existing best model retained.")
+
+else:
+
+    joblib.dump(best_final_model, best_model_path)
+
+    print("✅ No previous model found. Best model saved.")
+
 category_mapping = {}
 
 for col in categorical_features:
