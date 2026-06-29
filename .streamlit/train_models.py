@@ -539,7 +539,7 @@ if os.path.exists(best_model_path):
 
         print("Better model found. Model updated.")
 
-    elif:
+    else:
 
          mlflow.log_param("Best Model", best_final_name)
          mlflow.log_metric("Best R2", best_final_r2)
