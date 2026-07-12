@@ -1,5 +1,6 @@
 import json
 import subprocess
+import mlflow 
 
 with open("data/drift_report.json", "r") as f:
      drift = json.load(f)
