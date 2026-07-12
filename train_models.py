@@ -426,7 +426,7 @@ with mlflow.start_run(run_name="Random Forest Regression"):
        "RMSE": float(rmse)
       }
 
-     with open("metrics.json", "w") as f:
+     with open("data/metrics.json", "w") as f:
           json.dump(metrics, f, indent=4)
        
      print("Best Parameters:", rf_search.best_params_)
@@ -492,7 +492,7 @@ tuned_results_df = pd.DataFrame(tuned_results).T
 
 tuned_results_df = tuned_results_df.sort_values(by="R2",ascending=False)
 
-tuned_results_df.to_csv("model_comparison_after_tuning.csv")
+tuned_results_df.to_csv("data/model_comparison_after_tuning.csv")
 
 print("\n" + "=" * 50)
 print("MODEL COMPARISON AFTER TUNING")
