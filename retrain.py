@@ -1,7 +1,7 @@
 import json
 import subprocess
 
-with open("drift_report.json", "r") as f:
+with open("data/drift_report.json", "r") as f:
      drift = json.load(f)
 
 if drift["Data Drift"] == "Yes":
