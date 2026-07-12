@@ -2,10 +2,10 @@ import pandas as pd
 import json
 
 # Reference (training) data
-reference = pd.read_csv("train.csv")
+reference = pd.read_csv("data/train.csv")
 
 # Current production data
-current = pd.read_csv("prediction_logs.csv")
+current = pd.read_csv("data/prediction_logs.csv")
 
 # Example drift calculation
 drift_score = abs(
