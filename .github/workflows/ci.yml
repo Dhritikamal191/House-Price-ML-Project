@@ -54,16 +54,16 @@ jobs:
 
       - name: Verify Model Artifacts
         run: |
-          test -f best_model.pkl
-          test -f metrics.json
+          test -f models/best_model.pkl
+          test -f data/metrics.json
 
       - name: Upload Model Artifact
         uses: actions/upload-artifact@v4
         with:
           name: trained-model
           path: |
-            best_model.pkl
-            metrics.json
+            models/best_model.pkl
+            data/metrics.json
 
       - name: Pipeline Completed
         run: echo "House Price Prediction MLOps Pipeline completed successfully."
