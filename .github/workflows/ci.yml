@@ -1,34 +1,69 @@
-name: House Price CI
+name: House Price Prediction MLOps Pipeline
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
   pull_request:
-    branches: [main]
+    branches:
+      - main
+
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
     steps:
 
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
 
       - name: Install Dependencies
         run: |
-          cd .streamlit
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Check App
+      - name: Verify Python Files
         run: |
-          cd .streamlit
-          python -m py_compile app.py
           python -m py_compile train_models.py
+          python -m py_compile app.py
+          python -m py_compile api.py
+          python -m py_compile retrain.py
+          python -m py_compile drift_detection.py
+          python -m py_compile schemas.py
+
+      - name: Train Model
+        run: |
+          python train_models.py
+
+      - name: Run Drift Detection
+        run: |
+          python drift_detection.py
+
+      - name: Run Retraining Check
+        run: |
+          python retrain.py
+
+      - name: Verify Model Artifacts
+        run: |
+          test -f best_model.pkl
+          test -f metrics.json
+
+      - name: Upload Model Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model
+          path: |
+            best_model.pkl
+            metrics.json
+
+      - name: Pipeline Completed
+        run: echo "House Price Prediction MLOps Pipeline completed successfully."
