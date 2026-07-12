@@ -1,6 +1,7 @@
 streamlit
 pandas
 numpy
+fastapi
 scikit-learn==1.5.0
 matplotlib==3.10.8
 seaborn==0.13.2
@@ -8,3 +9,7 @@ plotly==6.6.0
 joblib==1.4.2
 pyyaml
 supabase
+mlflow
+pydantic
+python-multipart
+requests
