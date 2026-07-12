@@ -29,12 +29,12 @@ app = FastAPI(
 # LOAD MODELS
 # ======================================================
 
-sample_df = pd.read_csv("train.csv")
+sample_df = pd.read_csv("data/train.csv")
 default_features= sample_df.drop("SalePrice", axis=1).iloc[0].to_dict()
 
-BEST_MODEL_PATH = "best_model.pkl"
-ALL_MODELS_PATH = "all_models.pkl"
-LOG_FILE = "prediction_logs.csv"
+BEST_MODEL_PATH = "models/best_model.pkl"
+ALL_MODELS_PATH = "models/all_models.pkl"
+LOG_FILE = "data/prediction_logs.csv"
 
 try:
     best_model = joblib.load(BEST_MODEL_PATH)
