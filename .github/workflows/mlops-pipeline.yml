@@ -56,10 +56,9 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-
-          git add models/
-          git add mlflow.db
-          git add mlruns/
+     
+          git add models
+          git add data/metrics.json         
 
           git commit -m "Automatic weekly retraining"
 
