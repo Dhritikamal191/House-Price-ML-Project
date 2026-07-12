@@ -12,7 +12,7 @@ data:
   submission: data/submission.csv
   training_log: data/training.log
   Prediction_logs: data/predictions.csv
-  
+  logs: data/prediction_logs.csv 
 
 model:
   random_state: 42
