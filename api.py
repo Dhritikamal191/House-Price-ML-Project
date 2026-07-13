@@ -255,7 +255,7 @@ def batch_predict(data:list[HouseInput]):
 def metrics():
 
     if not os.path.exists("metrics.json"):
-           raise HTTPException(status_code=404, details="Metrics file not found.")
+           raise HTTPException(status_code=404, detail ="Metrics file not found.")
  
     with open("metrics.json", "r") as f:
          metrics = json.load(f)
