@@ -4,7 +4,7 @@
 
 [![Supabase](https://img.shields.io/badge/Supabase-Prediction%20Logging-green)](https://supabase.com/dashboard/project/mfoauekyjbkppdyxwzfu/editor/17588)
 
-[![Swagger API](https://img.shields.io/badge/Swagger-API-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://house-price-ml-project-production-415a.up.railway.app>/docs)
+[![Swagger API](https://img.shields.io/badge/Swagger-API-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://house-price-ml-project-production-415a.up.railway.app/docs#>)
 
 # 🏡 House Price Prediction using Machine Learning & MLOps
 
